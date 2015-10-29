@@ -39,6 +39,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DxDLL.cs" />
+    <Compile Include="Position.cs" />
     <Compile Include="STG.cs" />
   </ItemGroup>
   <ItemGroup>
