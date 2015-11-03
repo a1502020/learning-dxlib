@@ -114,10 +114,10 @@ namespace STG
 
                 // 画面外の弾を削除
                 ownBullets.RemoveAll(bullet =>
-                    bullet.Position.X < bullet.Radius
-                    || bullet.Position.Y < bullet.Radius
-                    || bullet.Position.X > 640 - bullet.Radius
-                    || bullet.Position.Y > 480 - bullet.Radius);
+                    bullet.Position.X < -bullet.Radius
+                    || bullet.Position.Y < -bullet.Radius
+                    || bullet.Position.X > 640 + bullet.Radius
+                    || bullet.Position.Y > 480 + bullet.Radius);
 
                 // 自機を描画
                 DX.DrawCircle((int)ownPos.X, (int)ownPos.Y, ownRadius, ownColor);
