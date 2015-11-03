@@ -17,6 +17,9 @@ namespace STG
             DX.SetDrawScreen(DX.DX_SCREEN_BACK);
             DX.DxLib_Init();
 
+            // 乱数
+            var rnd = new Random();
+
             // 自機
             var ownPos = new Position(320.0, 240.0);
             var ownRadius = 16;
@@ -25,6 +28,9 @@ namespace STG
 
             // 自機の弾
             var ownBullets = new List<Bullet>();
+
+            // 敵機
+            var enemies = new List<Enemy>();
 
             // キー入力用バッファ
             var keys = new byte[256];
@@ -71,6 +77,18 @@ namespace STG
                     ownPos.Y = 480 - ownRadius;
                 }
 
+                // ランダムで敵出現
+                if (rnd.Next(60) == 0)
+                {
+                    enemies.Add(new Enemy());
+                }
+
+                // 敵の処理
+                foreach (var enemy in enemies)
+                {
+                    enemy.Update();
+                }
+
                 // 弾を発射
                 if (keys[DX.KEY_INPUT_SPACE] != 0)
                 {
@@ -79,6 +97,12 @@ namespace STG
 
                 // 画面を黒で塗りつぶし
                 DX.DrawFillBox(0, 0, 640, 480, DX.GetColor(0, 0, 0));
+
+                // 敵の描画
+                foreach (var enemy in enemies)
+                {
+                    enemy.Draw();
+                }
 
                 // 弾の描画と移動
                 foreach (var bullet in ownBullets)
