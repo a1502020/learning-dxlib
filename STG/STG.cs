@@ -17,16 +17,10 @@ namespace STG
             DX.SetDrawScreen(DX.DX_SCREEN_BACK);
             DX.DxLib_Init();
 
-            // 乱数
             var rnd = new Random();
 
-            // 自機
             var ownChar = new OwnCharacter(new Position(320.0, 240.0), 16, DX.GetColor(255, 0, 0));
-
-            // 自機の弾
             var ownBullets = new List<Bullet>();
-
-            // 敵機
             var enemies = new List<Enemy>();
 
             // キー入力用バッファ
@@ -35,43 +29,25 @@ namespace STG
             // メインループ
             while (DX.ProcessMessage() == 0)
             {
-                // キー入力情報取得
                 DX.GetHitKeyStateAll(out keys[0]);
 
-                // 自機の処理
+                // 自機
                 ownChar.Update(keys);
 
-                // ランダムで敵出現
+                // 敵
                 if (rnd.Next(60) == 0)
                 {
                     enemies.Add(new Enemy());
                 }
+                enemies.ForEach(enemy => enemy.Update());
 
-                // 敵の処理
-                foreach (var enemy in enemies)
-                {
-                    enemy.Update();
-                }
-
-                // 弾を発射
+                // 弾
                 if (keys[DX.KEY_INPUT_SPACE] != 0)
                 {
                     ownBullets.Add(new Bullet(ownChar.Position, 5, 3 * Math.PI / 2, 10.0, DX.GetColor(255, 255, 0)));
                 }
-
-                // 画面を黒で塗りつぶし
-                DX.DrawFillBox(0, 0, 640, 480, DX.GetColor(0, 0, 0));
-
-                // 敵の描画
-                foreach (var enemy in enemies)
-                {
-                    enemy.Draw();
-                }
-
-                // 弾の描画と移動
                 foreach (var bullet in ownBullets)
                 {
-                    DX.DrawCircle((int)bullet.Position.X, (int)bullet.Position.Y, bullet.Radius, bullet.Color);
                     bullet.Position.X += bullet.Speed * Math.Cos(bullet.Angle);
                     bullet.Position.Y += bullet.Speed * Math.Sin(bullet.Angle);
                 }
@@ -83,7 +59,11 @@ namespace STG
                     || bullet.Position.X > 640 + bullet.Radius
                     || bullet.Position.Y > 480 + bullet.Radius);
 
-                // 自機を描画
+                // 描画
+                DX.DrawFillBox(0, 0, 640, 480, DX.GetColor(0, 0, 0));
+                enemies.ForEach(enemy => enemy.Draw());
+                ownBullets.ForEach(bullet =>
+                    DX.DrawCircle((int)bullet.Position.X, (int)bullet.Position.Y, bullet.Radius, bullet.Color));
                 ownChar.Draw();
 
                 DX.ScreenFlip();
