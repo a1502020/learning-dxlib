@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DxLibDLL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,23 @@ namespace STG
             Angle = angle;
             Speed = speed;
             Color = color;
+        }
+
+        /// <summary>
+        /// 1フレームぶんの処理を行う。
+        /// </summary>
+        public void Update()
+        {
+            Position.X += Speed * Math.Cos(Angle);
+            Position.Y += Speed * Math.Sin(Angle);
+        }
+
+        /// <summary>
+        /// 弾を描画する。
+        /// </summary>
+        public void Draw()
+        {
+            DX.DrawCircle((int)Position.X, (int)Position.Y, Radius, Color);
         }
 
         /// <summary>

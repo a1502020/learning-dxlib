@@ -46,11 +46,7 @@ namespace STG
                 {
                     ownBullets.Add(new Bullet(ownChar.Position, 5, 3 * Math.PI / 2, 10.0, DX.GetColor(255, 255, 0)));
                 }
-                foreach (var bullet in ownBullets)
-                {
-                    bullet.Position.X += bullet.Speed * Math.Cos(bullet.Angle);
-                    bullet.Position.Y += bullet.Speed * Math.Sin(bullet.Angle);
-                }
+                ownBullets.ForEach(bullet => bullet.Update());
 
                 // 画面外の弾を削除
                 ownBullets.RemoveAll(bullet =>
@@ -62,8 +58,7 @@ namespace STG
                 // 描画
                 DX.DrawFillBox(0, 0, 640, 480, DX.GetColor(0, 0, 0));
                 enemies.ForEach(enemy => enemy.Draw());
-                ownBullets.ForEach(bullet =>
-                    DX.DrawCircle((int)bullet.Position.X, (int)bullet.Position.Y, bullet.Radius, bullet.Color));
+                ownBullets.ForEach(bullet => bullet.Draw());
                 ownChar.Draw();
 
                 DX.ScreenFlip();
