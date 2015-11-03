@@ -55,6 +55,36 @@ namespace STG
                     || bullet.Position.X > 640 + bullet.Radius
                     || bullet.Position.Y > 480 + bullet.Radius);
 
+                // 敵と弾の当たり判定
+                for (var bi = ownBullets.Count - 1; bi >= 0; --bi)
+                {
+                    var bullet = ownBullets[bi];
+                    for (var ei = enemies.Count - 1; ei >= 0; --ei)
+                    {
+                        var enemy = enemies[ei];
+                        if (collidesCircleCircle(
+                            bullet.Position.X, bullet.Position.Y, bullet.Radius,
+                            enemy.Position.X, enemy.Position.Y, enemy.Radius))
+                        {
+                            // 接触している
+                            ownBullets.RemoveAt(bi);
+                            enemies.RemoveAt(ei);
+                        }
+                    }
+                }
+                
+                // 自機と敵の当たり判定
+                foreach (var enemy in enemies)
+                {
+                    if (collidesCircleCircle(
+                        ownChar.Position.X, ownChar.Position.Y, ownChar.Radius,
+                        enemy.Position.X, enemy.Position.Y, enemy.Radius))
+                    {
+                        // 接触している
+                        // まだ何もない
+                    }
+                }
+
                 // 描画
                 DX.DrawFillBox(0, 0, 640, 480, DX.GetColor(0, 0, 0));
                 enemies.ForEach(enemy => enemy.Draw());
@@ -66,6 +96,24 @@ namespace STG
 
             // 終了処理(finalization)
             DX.DxLib_End();
+        }
+
+        /// <summary>
+        /// 2つの円 (円1、円2) が接触しているか否かを計算する。
+        /// </summary>
+        /// <param name="x1">円1の中心の X 座標</param>
+        /// <param name="y1">円1の中心の Y 座標</param>
+        /// <param name="r1">円1の半径</param>
+        /// <param name="x2">円2の中心の X 座標</param>
+        /// <param name="y2">円2の中心の Y 座標</param>
+        /// <param name="r2">円2の半径</param>
+        /// <returns>2つの円が接触していれば true 、そうでなければ false</returns>
+        private static bool collidesCircleCircle(double x1, double y1, double r1, double x2, double y2, double r2)
+        {
+            var dx = x2 - x1;
+            var dy = y2 - y1;
+            var sr = r1 + r2;
+            return dx * dx + dy * dy <= sr * sr;
         }
     }
 }
