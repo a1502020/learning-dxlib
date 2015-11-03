@@ -21,10 +21,7 @@ namespace STG
             var rnd = new Random();
 
             // 自機
-            var ownPos = new Position(320.0, 240.0);
-            var ownRadius = 16;
-            var ownColor = DX.GetColor(255, 0, 0);
-            var ownSpeed = 5.0;
+            var ownChar = new OwnCharacter(new Position(320.0, 240.0), 16, DX.GetColor(255, 0, 0));
 
             // 自機の弾
             var ownBullets = new List<Bullet>();
@@ -41,41 +38,8 @@ namespace STG
                 // キー入力情報取得
                 DX.GetHitKeyStateAll(out keys[0]);
 
-                // 移動(斜め移動が速くなるのは気にしないことにした)
-                if (keys[DX.KEY_INPUT_UP] != 0)
-                {
-                    ownPos.Y -= ownSpeed;
-                }
-                if (keys[DX.KEY_INPUT_LEFT] != 0)
-                {
-                    ownPos.X -= ownSpeed;
-                }
-                if (keys[DX.KEY_INPUT_DOWN] != 0)
-                {
-                    ownPos.Y += ownSpeed;
-                }
-                if (keys[DX.KEY_INPUT_RIGHT] != 0)
-                {
-                    ownPos.X += ownSpeed;
-                }
-
-                // 画面外に行かないようにする
-                if (ownPos.X < ownRadius)
-                {
-                    ownPos.X = ownRadius;
-                }
-                if (ownPos.Y < ownRadius)
-                {
-                    ownPos.Y = ownRadius;
-                }
-                if (ownPos.X > 640 - ownRadius)
-                {
-                    ownPos.X = 640 - ownRadius;
-                }
-                if (ownPos.Y > 480 - ownRadius)
-                {
-                    ownPos.Y = 480 - ownRadius;
-                }
+                // 自機の処理
+                ownChar.Update(keys);
 
                 // ランダムで敵出現
                 if (rnd.Next(60) == 0)
@@ -92,7 +56,7 @@ namespace STG
                 // 弾を発射
                 if (keys[DX.KEY_INPUT_SPACE] != 0)
                 {
-                    ownBullets.Add(new Bullet(ownPos, 5, 3 * Math.PI / 2, 10.0, DX.GetColor(255, 255, 0)));
+                    ownBullets.Add(new Bullet(ownChar.Position, 5, 3 * Math.PI / 2, 10.0, DX.GetColor(255, 255, 0)));
                 }
 
                 // 画面を黒で塗りつぶし
@@ -120,7 +84,7 @@ namespace STG
                     || bullet.Position.Y > 480 + bullet.Radius);
 
                 // 自機を描画
-                DX.DrawCircle((int)ownPos.X, (int)ownPos.Y, ownRadius, ownColor);
+                ownChar.Draw();
 
                 DX.ScreenFlip();
             }
