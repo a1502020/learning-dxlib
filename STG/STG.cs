@@ -23,6 +23,9 @@ namespace STG
             var ownBullets = new List<Bullet>();
             var enemies = new List<Enemy>();
 
+            // 弾の発射間隔制御用カウンタ
+            var bulletFrame = 0;
+
             // キー入力用バッファ
             var keys = new byte[256];
 
@@ -42,9 +45,14 @@ namespace STG
                 enemies.ForEach(enemy => enemy.Update());
 
                 // 弾
-                if (keys[DX.KEY_INPUT_SPACE] != 0)
+                if (bulletFrame == 0 && keys[DX.KEY_INPUT_SPACE] != 0)
                 {
                     ownBullets.Add(new Bullet(ownChar.Position, 5, 3 * Math.PI / 2, 10.0, DX.GetColor(255, 255, 0)));
+                    bulletFrame = 12;
+                }
+                if (bulletFrame > 0)
+                {
+                    --bulletFrame;
                 }
                 ownBullets.ForEach(bullet => bullet.Update());
 
