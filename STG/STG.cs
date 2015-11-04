@@ -14,8 +14,8 @@ namespace STG
             // 初期化(initialization)
             DX.SetMainWindowText("Shooting");
             DX.ChangeWindowMode(DX.TRUE);
-            DX.SetDrawScreen(DX.DX_SCREEN_BACK);
             DX.DxLib_Init();
+            DX.SetDrawScreen(DX.DX_SCREEN_BACK);
 
             var rnd = new Random();
 
