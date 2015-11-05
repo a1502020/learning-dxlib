@@ -22,6 +22,7 @@ namespace STG
             var ownChar = new OwnCharacter(new Position(320.0, 240.0), 16, DX.GetColor(255, 0, 0));
             var ownBullets = new List<Bullet>();
             var enemies = new List<Enemy>();
+            var enemyBullets = new List<Bullet>();
 
             // 弾の発射間隔制御用カウンタ
             var bulletFrame = 0;
@@ -42,9 +43,9 @@ namespace STG
                 {
                     enemies.Add(new Enemy());
                 }
-                enemies.ForEach(enemy => enemy.Update());
+                enemies.ForEach(enemy => enemy.Update(enemyBullets));
 
-                // 弾
+                // 自機の弾
                 if (bulletFrame == 0 && keys[DX.KEY_INPUT_SPACE] != 0)
                 {
                     ownBullets.Add(new Bullet(ownChar.Position, 5, 3 * Math.PI / 2, 10.0, DX.GetColor(255, 255, 0)));
@@ -56,8 +57,16 @@ namespace STG
                 }
                 ownBullets.ForEach(bullet => bullet.Update());
 
+                // 敵の弾
+                enemyBullets.ForEach(bullet => bullet.Update());
+
                 // 画面外の弾を削除
                 ownBullets.RemoveAll(bullet =>
+                    bullet.Position.X < -bullet.Radius
+                    || bullet.Position.Y < -bullet.Radius
+                    || bullet.Position.X > 640 + bullet.Radius
+                    || bullet.Position.Y > 480 + bullet.Radius);
+                enemyBullets.RemoveAll(bullet =>
                     bullet.Position.X < -bullet.Radius
                     || bullet.Position.Y < -bullet.Radius
                     || bullet.Position.X > 640 + bullet.Radius
@@ -93,10 +102,23 @@ namespace STG
                     }
                 }
 
+                // 自機と敵の弾の当たり判定
+                foreach (var bullet in enemyBullets)
+                {
+                    if (collidesCircleCircle(
+                        ownChar.Position.X, ownChar.Position.Y, ownChar.Radius,
+                        bullet.Position.X, bullet.Position.Y, bullet.Radius))
+                    {
+                        // 接触している
+                        // まだ何もない
+                    }
+                }
+
                 // 描画
                 DX.DrawFillBox(0, 0, 640, 480, DX.GetColor(0, 0, 0));
                 enemies.ForEach(enemy => enemy.Draw());
                 ownBullets.ForEach(bullet => bullet.Draw());
+                enemyBullets.ForEach(bullet => bullet.Draw());
                 ownChar.Draw();
 
                 DX.ScreenFlip();
