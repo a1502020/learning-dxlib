@@ -43,6 +43,7 @@
     <Compile Include="Enemy.cs" />
     <Compile Include="OwnCharacter.cs" />
     <Compile Include="Position.cs" />
+    <Compile Include="ShootingGame.cs" />
     <Compile Include="STG.cs" />
   </ItemGroup>
   <ItemGroup>
