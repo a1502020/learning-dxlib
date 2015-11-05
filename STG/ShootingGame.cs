@@ -30,7 +30,15 @@ namespace STG
             // 敵
             if (rnd.Next(60) == 0)
             {
-                Enemies.Add(new SimpleEnemy(this));
+                var r = rnd.Next(2);
+                if (r == 0)
+                {
+                    Enemies.Add(new SimpleEnemy(this));
+                }
+                else
+                {
+                    Enemies.Add(new BoarEnemy(this));
+                }
             }
             Enemies.ForEach(enemy => enemy.Update());
 

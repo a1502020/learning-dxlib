@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace STG
 {
-    class SimpleEnemy : Enemy
+    public class SimpleEnemy : Enemy
     {
         /// <summary>
         /// SimpleEnemy を初期化する。
@@ -35,7 +35,7 @@ namespace STG
 
             // 弾を撃つ
             ++frameCnt;
-            if (frameCnt == 30)
+            if (frameCnt == 40)
             {
                 frameCnt = 0;
                 var bulletAngle = Math.Atan2(Game.OwnChar.Position.Y - Position.Y, Game.OwnChar.Position.X - Position.X);
