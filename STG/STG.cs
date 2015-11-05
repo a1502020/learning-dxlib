@@ -43,7 +43,7 @@ namespace STG
                 {
                     enemies.Add(new Enemy());
                 }
-                enemies.ForEach(enemy => enemy.Update(enemyBullets));
+                enemies.ForEach(enemy => enemy.Update(enemyBullets, ownChar.Position));
 
                 // 自機の弾
                 if (bulletFrame == 0 && keys[DX.KEY_INPUT_SPACE] != 0)

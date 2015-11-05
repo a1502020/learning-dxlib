@@ -24,7 +24,7 @@ namespace STG
         /// <summary>
         /// 1フレームぶんの処理を行う。
         /// </summary>
-        public void Update(List<Bullet> bullets)
+        public void Update(List<Bullet> bullets, Position ownPos)
         {
             // 移動
             Position.X += speed * Math.Cos(angle);
@@ -32,12 +32,11 @@ namespace STG
 
             // 弾を撃つ
             ++frameCnt;
-            if (frameCnt == 10)
+            if (frameCnt == 30)
             {
                 frameCnt = 0;
-                bullets.Add(new Bullet(
-                    Position, 10, rnd.NextDouble() * 2 * Math.PI, 5.0, DX.GetColor(0, 255, 255)
-                    ));
+                var bulletAngle = Math.Atan2(ownPos.Y - Position.Y, ownPos.X - Position.X);
+                bullets.Add(new Bullet(Position, 10, bulletAngle, 5.0, DX.GetColor(0, 255, 255)));
             }
         }
 
