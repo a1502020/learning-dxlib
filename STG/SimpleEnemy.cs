@@ -12,7 +12,8 @@ namespace STG
         /// <summary>
         /// SimpleEnemy を初期化する。
         /// </summary>
-        public SimpleEnemy()
+        public SimpleEnemy(ShootingGame game)
+            : base(game)
         {
             Radius = 20;
             Position = new Position(rnd.Next(Radius, 640 - Radius), -Radius);
@@ -26,7 +27,7 @@ namespace STG
         /// </summary>
         /// <param name="bullets"></param>
         /// <param name="ownPos"></param>
-        public override void Update(List<Bullet> bullets, Position ownPos)
+        public override void Update()
         {
             // 移動
             Position.X += speed * Math.Cos(angle);
@@ -37,8 +38,8 @@ namespace STG
             if (frameCnt == 30)
             {
                 frameCnt = 0;
-                var bulletAngle = Math.Atan2(ownPos.Y - Position.Y, ownPos.X - Position.X);
-                bullets.Add(new Bullet(Position, 10, bulletAngle, 5.0, DX.GetColor(0, 255, 255)));
+                var bulletAngle = Math.Atan2(Game.OwnChar.Position.Y - Position.Y, Game.OwnChar.Position.X - Position.X);
+                Game.EnemyBullets.Add(new Bullet(Position, 10, bulletAngle, 5.0, DX.GetColor(0, 255, 255)));
             }
         }
 

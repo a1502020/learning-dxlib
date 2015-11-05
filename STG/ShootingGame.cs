@@ -7,10 +7,14 @@ using System.Threading.Tasks;
 
 namespace STG
 {
-    class ShootingGame
+    public class ShootingGame
     {
         public ShootingGame()
         {
+            OwnChar = new OwnCharacter(new Position(320.0, 240.0), 16, DX.GetColor(255, 0, 0));
+            OwnBullets = new List<Bullet>();
+            Enemies = new List<Enemy>();
+            EnemyBullets = new List<Bullet>();
         }
 
         /// <summary>
@@ -21,65 +25,65 @@ namespace STG
             DX.GetHitKeyStateAll(out keys[0]);
 
             // 自機
-            ownChar.Update(keys);
+            OwnChar.Update(keys);
 
             // 敵
             if (rnd.Next(60) == 0)
             {
-                enemies.Add(new SimpleEnemy());
+                Enemies.Add(new SimpleEnemy(this));
             }
-            enemies.ForEach(enemy => enemy.Update(enemyBullets, ownChar.Position));
+            Enemies.ForEach(enemy => enemy.Update());
 
             // 自機の弾
             if (bulletFrame == 0 && keys[DX.KEY_INPUT_SPACE] != 0)
             {
-                ownBullets.Add(new Bullet(ownChar.Position, 5, 3 * Math.PI / 2, 10.0, DX.GetColor(255, 255, 0)));
+                OwnBullets.Add(new Bullet(OwnChar.Position, 5, 3 * Math.PI / 2, 10.0, DX.GetColor(255, 255, 0)));
                 bulletFrame = 12;
             }
             if (bulletFrame > 0)
             {
                 --bulletFrame;
             }
-            ownBullets.ForEach(bullet => bullet.Update());
+            OwnBullets.ForEach(bullet => bullet.Update());
 
             // 敵の弾
-            enemyBullets.ForEach(bullet => bullet.Update());
+            EnemyBullets.ForEach(bullet => bullet.Update());
 
             // 画面外の弾を削除
-            ownBullets.RemoveAll(bullet =>
+            OwnBullets.RemoveAll(bullet =>
                 bullet.Position.X < -bullet.Radius
                 || bullet.Position.Y < -bullet.Radius
                 || bullet.Position.X > 640 + bullet.Radius
                 || bullet.Position.Y > 480 + bullet.Radius);
-            enemyBullets.RemoveAll(bullet =>
+            EnemyBullets.RemoveAll(bullet =>
                 bullet.Position.X < -bullet.Radius
                 || bullet.Position.Y < -bullet.Radius
                 || bullet.Position.X > 640 + bullet.Radius
                 || bullet.Position.Y > 480 + bullet.Radius);
 
             // 敵と弾の当たり判定
-            for (var bi = ownBullets.Count - 1; bi >= 0; --bi)
+            for (var bi = OwnBullets.Count - 1; bi >= 0; --bi)
             {
-                var bullet = ownBullets[bi];
-                for (var ei = enemies.Count - 1; ei >= 0; --ei)
+                var bullet = OwnBullets[bi];
+                for (var ei = Enemies.Count - 1; ei >= 0; --ei)
                 {
-                    var enemy = enemies[ei];
+                    var enemy = Enemies[ei];
                     if (collidesCircleCircle(
                         bullet.Position.X, bullet.Position.Y, bullet.Radius,
                         enemy.Position.X, enemy.Position.Y, enemy.Radius))
                     {
                         // 接触している
-                        ownBullets.RemoveAt(bi);
-                        enemies.RemoveAt(ei);
+                        OwnBullets.RemoveAt(bi);
+                        Enemies.RemoveAt(ei);
                     }
                 }
             }
 
             // 自機と敵の当たり判定
-            foreach (var enemy in enemies)
+            foreach (var enemy in Enemies)
             {
                 if (collidesCircleCircle(
-                    ownChar.Position.X, ownChar.Position.Y, ownChar.Radius,
+                    OwnChar.Position.X, OwnChar.Position.Y, OwnChar.Radius,
                     enemy.Position.X, enemy.Position.Y, enemy.Radius))
                 {
                     // 接触している
@@ -88,10 +92,10 @@ namespace STG
             }
 
             // 自機と敵の弾の当たり判定
-            foreach (var bullet in enemyBullets)
+            foreach (var bullet in EnemyBullets)
             {
                 if (collidesCircleCircle(
-                    ownChar.Position.X, ownChar.Position.Y, ownChar.Radius,
+                    OwnChar.Position.X, OwnChar.Position.Y, OwnChar.Radius,
                     bullet.Position.X, bullet.Position.Y, bullet.Radius))
                 {
                     // 接触している
@@ -106,10 +110,10 @@ namespace STG
         public void Draw()
         {
             DX.DrawFillBox(0, 0, 640, 480, DX.GetColor(0, 0, 0));
-            enemies.ForEach(enemy => enemy.Draw());
-            ownBullets.ForEach(bullet => bullet.Draw());
-            enemyBullets.ForEach(bullet => bullet.Draw());
-            ownChar.Draw();
+            Enemies.ForEach(enemy => enemy.Draw());
+            OwnBullets.ForEach(bullet => bullet.Draw());
+            EnemyBullets.ForEach(bullet => bullet.Draw());
+            OwnChar.Draw();
         }
 
         /// <summary>
@@ -119,6 +123,21 @@ namespace STG
         {
             get { return finished; }
         }
+
+        // 自機
+        public OwnCharacter OwnChar { get; private set; }
+
+        // 自機の弾
+        public List<Bullet> OwnBullets { get; private set; }
+
+        // 敵
+        public List<Enemy> Enemies { get; private set; }
+
+        // 敵の弾
+        public List<Bullet> EnemyBullets { get; private set; }
+
+        // キー入力用バッファ
+        private byte[] keys = new byte[256];
 
         /// <summary>
         /// 2つの円 (円1、円2) が接触しているか否かを計算する。
@@ -142,21 +161,6 @@ namespace STG
 
         // 終了フラグ
         private bool finished = false;
-
-        // 自機
-        private OwnCharacter ownChar = new OwnCharacter(new Position(320.0, 240.0), 16, DX.GetColor(255, 0, 0));
-
-        // 自機の弾
-        private List<Bullet> ownBullets = new List<Bullet>();
-
-        // 敵
-        private List<Enemy> enemies = new List<Enemy>();
-
-        // 敵の弾
-        private List<Bullet> enemyBullets = new List<Bullet>();
-
-        // キー入力用バッファ
-        private byte[] keys = new byte[256];
 
         // 弾の発射間隔制御用カウンタ
         private int bulletFrame = 0;
