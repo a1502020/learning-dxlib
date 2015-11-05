@@ -83,7 +83,7 @@ namespace STG
                     enemy.Position.X, enemy.Position.Y, enemy.Radius))
                 {
                     // 接触している
-                    // まだ何もない
+                    finished = true;
                 }
             }
 
@@ -95,7 +95,7 @@ namespace STG
                     bullet.Position.X, bullet.Position.Y, bullet.Radius))
                 {
                     // 接触している
-                    // まだ何もない
+                    finished = true;
                 }
             }
         }
@@ -117,7 +117,7 @@ namespace STG
         /// </summary>
         public bool Finished
         {
-            get { return false; }
+            get { return finished; }
         }
 
         /// <summary>
@@ -139,6 +139,9 @@ namespace STG
         }
 
         private Random rnd = new Random();
+
+        // 終了フラグ
+        private bool finished = false;
 
         // 自機
         private OwnCharacter ownChar = new OwnCharacter(new Position(320.0, 240.0), 16, DX.GetColor(255, 0, 0));
