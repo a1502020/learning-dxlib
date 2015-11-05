@@ -26,7 +26,7 @@ namespace STG
             // 敵
             if (rnd.Next(60) == 0)
             {
-                enemies.Add(new Enemy());
+                enemies.Add(new SimpleEnemy());
             }
             enemies.ForEach(enemy => enemy.Update(enemyBullets, ownChar.Position));
 

@@ -44,6 +44,7 @@
     <Compile Include="OwnCharacter.cs" />
     <Compile Include="Position.cs" />
     <Compile Include="ShootingGame.cs" />
+    <Compile Include="SimpleEnemy.cs" />
     <Compile Include="STG.cs" />
   </ItemGroup>
   <ItemGroup>
