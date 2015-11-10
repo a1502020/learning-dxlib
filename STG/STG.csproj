@@ -42,6 +42,9 @@
     <Compile Include="Bullet.cs" />
     <Compile Include="DxDLL.cs" />
     <Compile Include="Enemy.cs" />
+    <Compile Include="OctyanEnemy.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="OwnCharacter.cs" />
     <Compile Include="Position.cs" />
     <Compile Include="ShootingGame.cs" />

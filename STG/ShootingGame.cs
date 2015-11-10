@@ -32,14 +32,18 @@ namespace STG
             // 敵
             if (rnd.Next(60) == 0)
             {
-                var r = rnd.Next(2);
+                var r = rnd.Next(3);
                 if (r == 0)
                 {
                     Enemies.Add(new SimpleEnemy(this));
                 }
-                else
+                else if (r == 1)
                 {
                     Enemies.Add(new BoarEnemy(this));
+                }
+                else
+                {
+                    Enemies.Add(new OctyanEnemy(this));
                 }
             }
             Enemies.ForEach(enemy => enemy.Update());
