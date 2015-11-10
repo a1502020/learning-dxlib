@@ -11,7 +11,7 @@ namespace STG
     {
         public ShootingGame()
         {
-            OwnChar = new OwnCharacter(new Position(320.0, 240.0));
+            OwnChar = new OwnCharacter(this, new Position(320.0, 240.0));
             OwnBullets = new List<Bullet>();
             Enemies = new List<Enemy>();
             EnemyBullets = new List<Bullet>();
@@ -49,15 +49,6 @@ namespace STG
             Enemies.ForEach(enemy => enemy.Update());
 
             // 自機の弾
-            if (bulletFrame == 0 && keys[DX.KEY_INPUT_SPACE] != 0)
-            {
-                OwnBullets.Add(new Bullet(OwnChar.Position, 5, 3 * Math.PI / 2, 10.0, DX.GetColor(255, 255, 0)));
-                bulletFrame = 12;
-            }
-            if (bulletFrame > 0)
-            {
-                --bulletFrame;
-            }
             OwnBullets.ForEach(bullet => bullet.Update());
 
             // 敵の弾
@@ -176,9 +167,6 @@ namespace STG
 
         // 終了フラグ
         private bool finished = false;
-
-        // 弾の発射間隔制御用カウンタ
-        private int bulletFrame = 0;
 
         // 画像
         private int imgBack;

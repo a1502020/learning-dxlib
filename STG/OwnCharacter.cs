@@ -15,8 +15,9 @@ namespace STG
         /// <summary>
         /// 自機を初期化する。
         /// </summary>
-        public OwnCharacter(Position pos)
+        public OwnCharacter(ShootingGame game, Position pos)
         {
+            this.game = game;
             Position = pos.Clone();
             Radius = 9;
             speed = 5.0;
@@ -64,6 +65,17 @@ namespace STG
             {
                 Position.Y = 480 - Radius;
             }
+
+            // 弾を発射
+            if (bulletFrame == 0 && keys[DX.KEY_INPUT_SPACE] != 0)
+            {
+                game.OwnBullets.Add(new Bullet(Position, 5, 3 * Math.PI / 2, 10.0, DX.GetColor(255, 255, 0)));
+                bulletFrame = 12;
+            }
+            if (bulletFrame > 0)
+            {
+                --bulletFrame;
+            }
         }
 
         /// <summary>
@@ -84,10 +96,15 @@ namespace STG
         /// </summary>
         public int Radius { get; private set; }
 
+        private ShootingGame game;
+
         // 画像
         private int img;
 
         // 速度[px/frame]
         private double speed;
+
+        // 弾の発射間隔制御用カウンタ
+        private int bulletFrame = 0;
     }
 }
