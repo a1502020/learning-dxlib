@@ -11,10 +11,12 @@ namespace STG
     {
         public ShootingGame()
         {
-            OwnChar = new OwnCharacter(new Position(320.0, 240.0), 16, DX.GetColor(255, 0, 0));
+            OwnChar = new OwnCharacter(new Position(320.0, 240.0));
             OwnBullets = new List<Bullet>();
             Enemies = new List<Enemy>();
             EnemyBullets = new List<Bullet>();
+
+            imgBack = DX.LoadGraph("back.bmp");
         }
 
         /// <summary>
@@ -83,6 +85,7 @@ namespace STG
                         // 接触している
                         OwnBullets.RemoveAt(bi);
                         Enemies.RemoveAt(ei);
+                        break;
                     }
                 }
             }
@@ -117,7 +120,7 @@ namespace STG
         /// </summary>
         public void Draw()
         {
-            DX.DrawFillBox(0, 0, 640, 480, DX.GetColor(0, 0, 0));
+            DX.DrawGraph(0, 0, imgBack, DX.FALSE);
             Enemies.ForEach(enemy => enemy.Draw());
             OwnBullets.ForEach(bullet => bullet.Draw());
             EnemyBullets.ForEach(bullet => bullet.Draw());
@@ -172,5 +175,8 @@ namespace STG
 
         // 弾の発射間隔制御用カウンタ
         private int bulletFrame = 0;
+
+        // 画像
+        private int imgBack;
     }
 }

@@ -15,12 +15,12 @@ namespace STG
         /// <summary>
         /// 自機を初期化する。
         /// </summary>
-        public OwnCharacter(Position pos, int radius, uint color)
+        public OwnCharacter(Position pos)
         {
             Position = pos.Clone();
-            Radius = radius;
-            Color = color;
+            Radius = 9;
             speed = 5.0;
+            img = DX.LoadGraph("own.bmp");
         }
 
         /// <summary>
@@ -71,7 +71,7 @@ namespace STG
         /// </summary>
         public void Draw()
         {
-            DX.DrawCircle((int)Position.X, (int)Position.Y, Radius, Color);
+            DX.DrawGraph((int)(Position.X - 16), (int)(Position.Y - 22), img, DX.TRUE);
         }
 
         /// <summary>
@@ -84,10 +84,8 @@ namespace STG
         /// </summary>
         public int Radius { get; private set; }
 
-        /// <summary>
-        /// 色
-        /// </summary>
-        public uint Color { get; private set; }
+        // 画像
+        private int img;
 
         // 速度[px/frame]
         private double speed;
