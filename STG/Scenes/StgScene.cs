@@ -18,6 +18,10 @@ namespace Stg.Scenes
         public override void Update()
         {
             game.Update();
+            if (game.Finished)
+            {
+                NextScene = new TitleScene(key);
+            }
         }
 
         public override void Draw()

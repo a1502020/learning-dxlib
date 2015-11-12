@@ -12,7 +12,7 @@ namespace Stg
     {
         public ShootingGame(Key key)
         {
-            OwnChar = new OwnCharacter(new Position(320.0, 400.0));
+            OwnChar = new OwnCharacter(this, new Position(320.0, 400.0));
             OwnBullets = new List<Bullet>();
             Enemies = new List<Enemy>();
             EnemyBullets = new List<Bullet>();
@@ -45,15 +45,6 @@ namespace Stg
             Enemies.ForEach(enemy => enemy.Update());
 
             // 自機の弾
-            if (bulletFrame == 0 && key.IsPressed(DX.KEY_INPUT_SPACE))
-            {
-                OwnBullets.Add(new Bullet(OwnChar.Position, 5, 3 * Math.PI / 2, 10.0, DX.GetColor(255, 255, 0)));
-                bulletFrame = 12;
-            }
-            if (bulletFrame > 0)
-            {
-                --bulletFrame;
-            }
             OwnBullets.ForEach(bullet => bullet.Update());
 
             // 敵の弾
