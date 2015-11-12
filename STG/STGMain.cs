@@ -1,13 +1,14 @@
 ﻿using DxLibDLL;
+using Stg.Scenes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace STG
+namespace Stg
 {
-    class STG
+    class StgMain
     {
         public static void Main(string[] args)
         {
@@ -17,15 +18,16 @@ namespace STG
             DX.DxLib_Init();
             DX.SetDrawScreen(DX.DX_SCREEN_BACK);
 
-            // ゲーム本体
-            var game = new ShootingGame();
+            // タイトル画面
+            Scene scene = new TitleScene();
 
             // メインループ
-            while (DX.ProcessMessage() == 0 && !game.Finished)
+            while (DX.ProcessMessage() == 0 && scene != null)
             {
-                game.Update();
-                game.Draw();
+                scene.Update();
+                scene.Draw();
                 DX.ScreenFlip();
+                scene = scene.NextScene;
             }
 
             // 終了処理(finalization)

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace STG
+namespace Stg
 {
     /// <summary>
     /// 2次元平面上の位置を表す。
