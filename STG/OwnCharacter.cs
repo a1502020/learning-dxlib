@@ -27,22 +27,22 @@ namespace Stg
         /// 1フレームぶんの処理を行う。
         /// </summary>
         /// <param name="keys">GetHitKeyStateAll で取得したキー入力情報</param>
-        public void Update(byte[] keys)
+        public void Update(Key key)
         {
             // 移動(斜め移動が速くなるのは気にしないことにした)
-            if (keys[DX.KEY_INPUT_UP] != 0)
+            if (key.IsPressing(DX.KEY_INPUT_UP))
             {
                 Position.Y -= speed;
             }
-            if (keys[DX.KEY_INPUT_LEFT] != 0)
+            if (key.IsPressing(DX.KEY_INPUT_LEFT))
             {
                 Position.X -= speed;
             }
-            if (keys[DX.KEY_INPUT_DOWN] != 0)
+            if (key.IsPressing(DX.KEY_INPUT_DOWN))
             {
                 Position.Y += speed;
             }
-            if (keys[DX.KEY_INPUT_RIGHT] != 0)
+            if (key.IsPressing(DX.KEY_INPUT_RIGHT))
             {
                 Position.X += speed;
             }

@@ -10,7 +10,7 @@ namespace Stg
 {
     public class ShootingGame
     {
-        public ShootingGame()
+        public ShootingGame(Key key)
         {
             OwnChar = new OwnCharacter(new Position(320.0, 400.0));
             OwnBullets = new List<Bullet>();
@@ -18,6 +18,7 @@ namespace Stg
             EnemyBullets = new List<Bullet>();
 
             imgBack = DX.LoadGraph("back.bmp");
+            this.key = key;
         }
 
         /// <summary>
@@ -25,10 +26,8 @@ namespace Stg
         /// </summary>
         public void Update()
         {
-            DX.GetHitKeyStateAll(out keys[0]);
-
             // 自機
-            OwnChar.Update(keys);
+            OwnChar.Update(key);
 
             // 敵
             if (rnd.Next(60) == 0)
@@ -46,7 +45,7 @@ namespace Stg
             Enemies.ForEach(enemy => enemy.Update());
 
             // 自機の弾
-            if (bulletFrame == 0 && keys[DX.KEY_INPUT_SPACE] != 0)
+            if (bulletFrame == 0 && key.IsPressed(DX.KEY_INPUT_SPACE))
             {
                 OwnBullets.Add(new Bullet(OwnChar.Position, 5, 3 * Math.PI / 2, 10.0, DX.GetColor(255, 255, 0)));
                 bulletFrame = 12;
@@ -148,8 +147,8 @@ namespace Stg
         // 敵の弾
         public List<Bullet> EnemyBullets { get; private set; }
 
-        // キー入力用バッファ
-        private byte[] keys = new byte[256];
+        // キー入力
+        private Key key;
 
         /// <summary>
         /// 2つの円 (円1、円2) が接触しているか否かを計算する。

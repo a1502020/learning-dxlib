@@ -9,16 +9,16 @@ namespace Stg.Scenes
 {
     public sealed class TitleScene : Scene
     {
-        public TitleScene()
+        public TitleScene(Key key)
         {
+            this.key = key;
         }
 
         public override void Update()
         {
-            DX.GetHitKeyStateAll(out keys[0]);
-            if (keys[DX.KEY_INPUT_SPACE] != 0)
+            if (key.IsPressed(DX.KEY_INPUT_SPACE))
             {
-                NextScene = new StgScene();
+                NextScene = new StgScene(key);
             }
         }
 
@@ -30,6 +30,6 @@ namespace Stg.Scenes
 
         public override Scene NextScene { get; protected set; }
 
-        private byte[] keys = new byte[256];
+        private Key key;
     }
 }

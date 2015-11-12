@@ -18,15 +18,21 @@ namespace Stg
             DX.DxLib_Init();
             DX.SetDrawScreen(DX.DX_SCREEN_BACK);
 
+            // キー入力
+            var key = new Key();
+
             // タイトル画面
-            Scene scene = new TitleScene();
+            Scene scene = new TitleScene(key);
 
             // メインループ
             while (DX.ProcessMessage() == 0 && scene != null)
             {
+                key.Update();
                 scene.Update();
+
                 scene.Draw();
                 DX.ScreenFlip();
+
                 scene = scene.NextScene;
             }
 

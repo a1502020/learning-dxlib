@@ -9,6 +9,12 @@ namespace Stg.Scenes
 {
     public sealed class StgScene : Scene
     {
+        public StgScene(Key key)
+        {
+            this.key = key;
+            game = new ShootingGame(key);
+        }
+
         public override void Update()
         {
             game.Update();
@@ -21,6 +27,7 @@ namespace Stg.Scenes
 
         public override Scene NextScene { get; protected set; }
 
-        private ShootingGame game = new ShootingGame();
+        private ShootingGame game;
+        private Key key;
     }
 }
