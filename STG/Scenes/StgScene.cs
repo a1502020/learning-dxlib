@@ -11,14 +11,16 @@ namespace Stg.Scenes
     {
         public override void Update()
         {
+            game.Update();
         }
 
         public override void Draw()
         {
-            DX.DrawFillBox(0, 0, 640, 480, DX.GetColor(0, 0, 0));
-            DX.DrawString(0, 0, "STG", DX.GetColor(255, 255, 255));
+            game.Draw();
         }
 
         public override Scene NextScene { get; protected set; }
+
+        private ShootingGame game = new ShootingGame();
     }
 }

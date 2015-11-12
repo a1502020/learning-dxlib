@@ -12,7 +12,7 @@ namespace Stg
     {
         public ShootingGame()
         {
-            OwnChar = new OwnCharacter(new Position(320.0, 240.0));
+            OwnChar = new OwnCharacter(new Position(320.0, 400.0));
             OwnBullets = new List<Bullet>();
             Enemies = new List<Enemy>();
             EnemyBullets = new List<Bullet>();
