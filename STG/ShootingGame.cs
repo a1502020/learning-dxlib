@@ -17,6 +17,10 @@ namespace Stg
             Enemies = new List<Enemy>();
             EnemyBullets = new List<Bullet>();
 
+            // 敵の種類
+            enemyFactories.Add("simple", new SimpleEnemyFactory(this));
+            enemyFactories.Add("boar", new BoarEnemyFactory(this));
+
             imgBack = DX.LoadGraph("back.bmp");
             this.key = key;
         }
@@ -32,14 +36,14 @@ namespace Stg
             // 敵
             if (rnd.Next(60) == 0)
             {
-                var r = rnd.Next(2);
+                var r = rnd.Next(enemyFactories.Count);
                 if (r == 0)
                 {
-                    Enemies.Add(new SimpleEnemy(this));
+                    Enemies.Add(enemyFactories["simple"].Create());
                 }
                 else
                 {
-                    Enemies.Add(new BoarEnemy(this));
+                    Enemies.Add(enemyFactories["boar"].Create());
                 }
             }
             Enemies.ForEach(enemy => enemy.Update());
@@ -164,8 +168,8 @@ namespace Stg
         // 終了フラグ
         private bool finished = false;
 
-        // 弾の発射間隔制御用カウンタ
-        private int bulletFrame = 0;
+        // 敵生成
+        private Dictionary<string, EnemyFactory> enemyFactories = new Dictionary<string, EnemyFactory>();
 
         // 画像
         private int imgBack;
