@@ -59,10 +59,10 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="back.bmp">
+    <Content Include="img\back.bmp">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="own.bmp">
+    <Content Include="img\own.bmp">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

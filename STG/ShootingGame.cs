@@ -21,7 +21,7 @@ namespace Stg
             enemyFactories.Add("simple", new SimpleEnemyFactory(this));
             enemyFactories.Add("boar", new BoarEnemyFactory(this));
 
-            imgBack = DX.LoadGraph("back.bmp");
+            imgBack = DX.LoadGraph("img/back.bmp");
             this.key = key;
         }
 

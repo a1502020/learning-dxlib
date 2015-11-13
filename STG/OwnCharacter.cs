@@ -21,7 +21,7 @@ namespace Stg
             Position = pos.Clone();
             Radius = 9;
             speed = 5.0;
-            img = DX.LoadGraph("own.bmp");
+            img = DX.LoadGraph("img/own.bmp");
             bulletFrame = 0;
         }
 
