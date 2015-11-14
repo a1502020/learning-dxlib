@@ -51,6 +51,12 @@
     <Compile Include="Scene.cs" />
     <Compile Include="Scenes\StgScene.cs" />
     <Compile Include="Scenes\TitleScene.cs" />
+    <Compile Include="Script\EnemyStatement.cs" />
+    <Compile Include="Script\Script.cs" />
+    <Compile Include="Script\ScriptLoader.cs" />
+    <Compile Include="Script\ScriptRunner.cs" />
+    <Compile Include="Script\Statement.cs" />
+    <Compile Include="Script\WaitStatement.cs" />
     <Compile Include="ShootingGame.cs" />
     <Compile Include="Enemies\SimpleEnemy.cs" />
     <Compile Include="StgMain.cs" />
@@ -63,6 +69,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="img\own.bmp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="scripts\test.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

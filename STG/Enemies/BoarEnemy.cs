@@ -13,7 +13,7 @@ namespace Stg.Enemies
             : base(game)
         {
             Radius = 20;
-            Position = new Position(rnd.Next(Radius, 640 - Radius), -Radius);
+            Position = new Position(game.Rnd.Next(Radius, 640 - Radius), -Radius);
             color = DX.GetColor(255, 128, 0);
             speed = 3.0;
             angle = Math.Atan2(game.OwnChar.Position.Y - Position.Y, game.OwnChar.Position.X - Position.X);
@@ -40,7 +40,5 @@ namespace Stg.Enemies
         private double angle;
         private double speed;
         private uint color;
-
-        private Random rnd = new Random();
     }
 }

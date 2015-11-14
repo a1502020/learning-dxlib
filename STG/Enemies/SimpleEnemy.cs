@@ -16,7 +16,7 @@ namespace Stg.Enemies
             : base(game)
         {
             Radius = 20;
-            Position = new Position(rnd.Next(Radius, 640 - Radius), -Radius);
+            Position = new Position(game.Rnd.Next(Radius, 640 - Radius), -Radius);
             Color = DX.GetColor(0, 0, 255);
             speed = 3.0;
             angle = Math.PI / 2;
@@ -55,8 +55,6 @@ namespace Stg.Enemies
         /// 色
         /// </summary>
         public uint Color { get; protected set; }
-
-        private Random rnd = new Random();
 
         // 進行方向[rad]
         private double angle;

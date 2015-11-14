@@ -1,5 +1,6 @@
 ﻿using DxLibDLL;
 using Stg.Enemies;
+using Stg.Script;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,12 +18,13 @@ namespace Stg
             Enemies = new List<Enemy>();
             EnemyBullets = new List<Bullet>();
 
-            // 敵の種類
-            enemyFactories.Add("simple", new SimpleEnemyFactory(this));
-            enemyFactories.Add("boar", new BoarEnemyFactory(this));
-
             imgBack = DX.LoadGraph("img/back.bmp");
             this.key = key;
+
+            // スクリプト読み込み
+            var loader = new ScriptLoader(this);
+            var script = loader.Load("scripts/test.txt");
+            runner = new ScriptRunner(this, script);
         }
 
         /// <summary>
@@ -30,22 +32,13 @@ namespace Stg
         /// </summary>
         public void Update()
         {
+            // スクリプト実行
+            runner.Step();
+
             // 自機
             OwnChar.Update(key);
 
             // 敵
-            if (rnd.Next(60) == 0)
-            {
-                var r = rnd.Next(enemyFactories.Count);
-                if (r == 0)
-                {
-                    Enemies.Add(enemyFactories["simple"].Create());
-                }
-                else
-                {
-                    Enemies.Add(enemyFactories["boar"].Create());
-                }
-            }
             Enemies.ForEach(enemy => enemy.Update());
 
             // 自機の弾
@@ -142,6 +135,11 @@ namespace Stg
         // 敵の弾
         public List<Bullet> EnemyBullets { get; private set; }
 
+        /// <summary>
+        /// 乱数
+        /// </summary>
+        public Random Rnd = new Random();
+
         // キー入力
         private Key key;
 
@@ -163,15 +161,12 @@ namespace Stg
             return dx * dx + dy * dy <= sr * sr;
         }
 
-        private Random rnd = new Random();
-
         // 終了フラグ
         private bool finished = false;
 
-        // 敵生成
-        private Dictionary<string, EnemyFactory> enemyFactories = new Dictionary<string, EnemyFactory>();
-
         // 画像
         private int imgBack;
+
+        private ScriptRunner runner;
     }
 }
