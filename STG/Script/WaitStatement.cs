@@ -13,7 +13,7 @@ namespace Stg.Script
             this.time = time;
         }
 
-        public override void Run(ShootingGame game)
+        public override void Run()
         {
         }
 

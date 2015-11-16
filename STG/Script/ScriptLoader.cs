@@ -37,25 +37,7 @@ namespace Stg.Script
                 var c = sp[0];
                 if (c == "e")
                 {
-                    if (sp.Count < 2)
-                    {
-                        throw new FormatException();
-                    }
-                    var name = sp[1];
-                    if (name == "simple")
-                    {
-                        var factory = new SimpleEnemyFactory(game);
-                        res.Statements.Add(new EnemyStatement(factory));
-                    }
-                    else if (name == "boar")
-                    {
-                        var factory = new BoarEnemyFactory(game);
-                        res.Statements.Add(new EnemyStatement(factory));
-                    }
-                    else
-                    {
-                        throw new FormatException(string.Format("Unknown enemy name \"{0}\"", name));
-                    }
+                    res.Statements.Add(new EnemyStatement(game, sp));
                 }
             }
             return res;

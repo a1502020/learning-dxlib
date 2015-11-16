@@ -19,7 +19,7 @@ namespace Stg.Script
             while (pc < Script.Statements.Count && waitTime <= 0)
             {
                 var st = Script.Statements[pc];
-                st.Run(game);
+                st.Run();
                 waitTime = st.WaitTime;
                 ++pc;
             }
