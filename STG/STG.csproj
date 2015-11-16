@@ -43,6 +43,8 @@
     <Compile Include="DxDLL.cs" />
     <Compile Include="Enemies\BoarEnemyFactory.cs" />
     <Compile Include="Enemies\SimpleEnemyFactory.cs" />
+    <Compile Include="Enemies\TurnEnemy.cs" />
+    <Compile Include="Enemies\TurnEnemyFactory.cs" />
     <Compile Include="Enemy.cs" />
     <Compile Include="EnemyFactory.cs" />
     <Compile Include="Key.cs" />

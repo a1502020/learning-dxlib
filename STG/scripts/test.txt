@@ -1,22 +1,3 @@
 ﻿60
-e boar
-60
-e simple
-60
-e simple
-e simple
-e simple
-e boar
-e boar
-60
-e boar
-e boar
-e boar
-e boar
-e boar
-e boar
-e boar
-e boar
-e boar
-e boar
+e turn 100 -20 60 150 200 180 200 -20 200
 6000
