@@ -17,8 +17,9 @@ namespace Stg
         /// <param name="angle">進行方向[rad]</param>
         /// <param name="speed">速度[px/frame]</param>
         /// <param name="color">色</param>
-        public Bullet(Position position, int radius, double angle, double speed, uint color)
+        public Bullet(int power, Position position, int radius, double angle, double speed, uint color)
         {
+            Power = power;
             Position = position.Clone();
             Radius = radius;
             Angle = angle;
@@ -42,6 +43,11 @@ namespace Stg
         {
             DX.DrawCircle((int)Position.X, (int)Position.Y, Radius, Color);
         }
+
+        /// <summary>
+        /// 攻撃力
+        /// </summary>
+        public int Power { get; set; }
 
         /// <summary>
         /// 位置
@@ -70,7 +76,7 @@ namespace Stg
 
         public Bullet Clone()
         {
-            return new Bullet(Position, Radius, Angle, Speed, Color);
+            return new Bullet(Power, Position, Radius, Angle, Speed, Color);
         }
     }
 }

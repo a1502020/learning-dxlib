@@ -12,6 +12,8 @@ namespace Stg
         public Enemy(ShootingGame game)
         {
             Game = game;
+            Position = new Position();
+            Dead = false;
         }
 
         /// <summary>
@@ -23,6 +25,18 @@ namespace Stg
         /// Enemy を描画する。
         /// </summary>
         public abstract void Draw();
+
+        /// <summary>
+        /// 敵が攻撃された時の処理。
+        /// </summary>
+        /// <param name="damage"></param>
+        public virtual void OnDamaged(int damage)
+        {
+            if (damage > 0)
+            {
+                Dead = true;
+            }
+        }
 
         /// <summary>
         /// ゲーム本体
@@ -38,5 +52,10 @@ namespace Stg
         /// 半径
         /// </summary>
         public int Radius { get; protected set; }
+
+        /// <summary>
+        /// 死んだか否か
+        /// </summary>
+        public bool Dead { get; protected set; }
     }
 }

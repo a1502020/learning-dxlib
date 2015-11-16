@@ -70,7 +70,7 @@ namespace Stg
             // 弾を発射
             if (bulletFrame == 0 && key.IsPressing(DX.KEY_INPUT_SPACE))
             {
-                game.OwnBullets.Add(new Bullet(Position, 5, 3 * Math.PI / 2, 10.0, DX.GetColor(255, 255, 0)));
+                game.OwnBullets.Add(new Bullet(1, Position, 5, 3 * Math.PI / 2, 10.0, DX.GetColor(255, 255, 0)));
                 bulletFrame = 12;
             }
             if (bulletFrame > 0)

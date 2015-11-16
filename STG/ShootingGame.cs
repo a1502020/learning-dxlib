@@ -71,12 +71,13 @@ namespace Stg
                         enemy.Position.X, enemy.Position.Y, enemy.Radius))
                     {
                         // 接触している
+                        enemy.OnDamaged(bullet.Power);
                         OwnBullets.RemoveAt(bi);
-                        Enemies.RemoveAt(ei);
                         break;
                     }
                 }
             }
+            Enemies.RemoveAll(enemy => enemy.Dead);
 
             // 自機と敵の当たり判定
             foreach (var enemy in Enemies)
