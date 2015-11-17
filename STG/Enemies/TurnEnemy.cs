@@ -46,6 +46,12 @@ namespace Stg.Enemies
                 Position.X = StopPos.X;
                 Position.Y = StopPos.Y;
 
+                if (frame <= 30 && frame % 15 == 0)
+                {
+                    var angle = Math.Atan2(Game.OwnChar.Position.Y - Position.Y, Game.OwnChar.Position.X - Position.X);
+                    Game.EnemyBullets.Add(new Bullet(1, Position.Clone(), 5, angle, 5.0, DX.GetColor(255, 255, 0)));
+                }
+
                 ++frame;
                 if (frame >= StopTime)
                 {
