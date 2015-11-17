@@ -67,6 +67,29 @@ namespace Stg.Script
                 res.Bgm = sp[1];
                 res.BgmLoop = (sp.Count < 3 || sp[2] == "loop");
             }
+            else if (cmd == "time")
+            {
+                if (sp.Count < 2)
+                {
+                    throw new FormatException("time with too few arguments.");
+                }
+                if (sp[1] == "frame")
+                {
+                    res.Time = Script.TimeType.Frame;
+                }
+                else if (sp[1] == "bgm_sample")
+                {
+                    res.Time = Script.TimeType.BgmSample;
+                }
+                else if (sp[1] == "bgm_time")
+                {
+                    res.Time = Script.TimeType.BgmTime;
+                }
+                else
+                {
+                    throw new FormatException("time with invalid arguments.");
+                }
+            }
             else
             {
                 throw new FormatException(string.Format("unknown header \"{0}\"", cmd));

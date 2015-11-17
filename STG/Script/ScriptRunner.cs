@@ -24,8 +24,8 @@ namespace Stg.Script
             }
             else
             {
-                bgm = DX.LoadMusicMem(Path.Combine("bgm", Script.Bgm));
-                DX.PlayMusicMem(bgm, Script.BgmLoop ? DX.DX_PLAYTYPE_LOOP : DX.DX_PLAYTYPE_BACK);
+                bgm = DX.LoadSoundMem(Path.Combine("bgm", Script.Bgm));
+                DX.PlaySoundMem(bgm, Script.BgmLoop ? DX.DX_PLAYTYPE_LOOP : DX.DX_PLAYTYPE_BACK);
             }
         }
 
@@ -33,8 +33,8 @@ namespace Stg.Script
         {
             if (bgm != -1)
             {
-                DX.StopMusicMem(bgm);
-                DX.DeleteMusicMem(bgm);
+                DX.StopSoundMem(bgm);
+                DX.DeleteSoundMem(bgm);
                 bgm = -1;
             }
         }
@@ -45,12 +45,23 @@ namespace Stg.Script
             {
                 var st = Script.Statements[pc];
                 st.Run();
-                waitTime = st.WaitTime;
+                time = waitTime = st.WaitTime;
                 ++pc;
             }
-            if (waitTime > 0)
+            switch (Script.Time)
             {
-                --waitTime;
+                case Script.TimeType.Frame:
+                    if (waitTime > 0)
+                    {
+                        --waitTime;
+                    }
+                    break;
+                case Script.TimeType.BgmSample:
+                    waitTime = time - DX.GetSoundCurrentPosition(bgm);
+                    break;
+                case Stg.Script.Script.TimeType.BgmTime:
+                    waitTime = time - DX.GetSoundCurrentTime(bgm);
+                    break;
             }
         }
 
@@ -61,6 +72,7 @@ namespace Stg.Script
         private ShootingGame game;
 
         private int pc = 0;
+        private int time = 0;
         private int waitTime = 0;
 
         private int bgm;

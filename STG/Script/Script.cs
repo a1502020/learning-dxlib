@@ -17,5 +17,13 @@ namespace Stg.Script
 
         public string Bgm { get; set; }
         public bool BgmLoop { get; set; }
+
+        public enum TimeType
+        {
+            Frame = 0,
+            BgmSample,
+            BgmTime,
+        }
+        public TimeType Time { get; set; }
     }
 }
