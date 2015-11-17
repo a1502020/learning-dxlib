@@ -42,6 +42,16 @@ namespace Stg.Enemies
                 var bulletAngle = Math.Atan2(Game.OwnChar.Position.Y - Position.Y, Game.OwnChar.Position.X - Position.X);
                 Game.EnemyBullets.Add(new Bullet(1, Position, 10, bulletAngle, 5.0, DX.GetColor(128, 255, 255)));
             }
+
+            // 画面外に出たら消える
+            if (Position.X < -Radius || Position.Y < -Radius || Position.X > 640 + Radius || Position.Y > 480 + Radius)
+            {
+                Dead = appeared;
+            }
+            else
+            {
+                appeared = true;
+            }
         }
 
         /// <summary>
@@ -73,5 +83,6 @@ namespace Stg.Enemies
         public int Interval { get; private set; }
 
         private int frameCnt = 0;
+        private bool appeared = false;
     }
 }

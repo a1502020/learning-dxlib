@@ -27,6 +27,16 @@ namespace Stg.Enemies
             // 移動
             Position.X += speed * Math.Cos(angle);
             Position.Y += speed * Math.Sin(angle);
+
+            // 画面外に出たら消える
+            if (Position.X < -Radius || Position.Y < -Radius || Position.X > 640 + Radius || Position.Y > 480 + Radius)
+            {
+                Dead = appeared;
+            }
+            else
+            {
+                appeared = true;
+            }
         }
 
         /// <summary>
@@ -40,5 +50,6 @@ namespace Stg.Enemies
         private double angle;
         private double speed;
         private uint color;
+        private bool appeared = false;
     }
 }
