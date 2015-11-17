@@ -11,10 +11,10 @@ namespace Stg.Scenes
 {
     public sealed class StgScene : Scene
     {
-        public StgScene(Key key)
+        public StgScene(Key key, string scriptPath)
         {
             this.key = key;
-            game = new ShootingGame(key);
+            game = new ShootingGame(key, scriptPath);
         }
 
         public override void Update()

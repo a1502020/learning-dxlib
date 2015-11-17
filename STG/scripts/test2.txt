@@ -1,0 +1,194 @@
+﻿60
+e boar 20 -20
+10
+e boar 40 -20
+10
+e boar 60 -20
+10
+e boar 80 -20
+10
+e boar 100 -20
+10
+e boar 120 -20
+10
+e boar 140 -20
+10
+e boar 160 -20
+10
+e boar 180 -20
+10
+e boar 200 -20
+10
+e boar 200 -20
+10
+e boar 220 -20
+10
+e boar 240 -20
+10
+e boar 260 -20
+10
+e boar 280 -20
+10
+e boar 300 -20
+10
+e boar 320 -20
+10
+e boar 340 -20
+10
+e boar 360 -20
+10
+e boar 380 -20
+10
+e boar 400 -20
+10
+e boar 420 -20
+10
+e boar 440 -20
+10
+e boar 460 -20
+10
+e boar 480 -20
+10
+e boar 500 -20
+10
+e boar 520 -20
+10
+e boar 540 -20
+10
+e boar 560 -20
+10
+e boar 580 -20
+10
+e boar 600 -20
+10
+e boar 620 -20
+10
+e boar 20 -20
+10
+e boar 40 -20
+10
+e boar 60 -20
+10
+e boar 80 -20
+10
+e boar 100 -20
+10
+e boar 120 -20
+10
+e boar 140 -20
+10
+e boar 160 -20
+10
+e boar 180 -20
+10
+e boar 200 -20
+10
+e boar 200 -20
+10
+e boar 220 -20
+10
+e boar 240 -20
+10
+e boar 260 -20
+10
+e boar 280 -20
+10
+e boar 300 -20
+10
+e boar 320 -20
+10
+e boar 340 -20
+10
+e boar 360 -20
+10
+e boar 380 -20
+10
+e boar 400 -20
+10
+e boar 420 -20
+10
+e boar 440 -20
+10
+e boar 460 -20
+10
+e boar 480 -20
+10
+e boar 500 -20
+10
+e boar 520 -20
+10
+e boar 540 -20
+10
+e boar 560 -20
+10
+e boar 580 -20
+10
+e boar 600 -20
+10
+e boar 620 -20
+10
+e boar 20 -20
+10
+e boar 40 -20
+10
+e boar 60 -20
+10
+e boar 80 -20
+10
+e boar 100 -20
+10
+e boar 120 -20
+10
+e boar 140 -20
+10
+e boar 160 -20
+10
+e boar 180 -20
+10
+e boar 200 -20
+10
+e boar 200 -20
+10
+e boar 220 -20
+10
+e boar 240 -20
+10
+e boar 260 -20
+10
+e boar 280 -20
+10
+e boar 300 -20
+10
+e boar 320 -20
+10
+e boar 340 -20
+10
+e boar 360 -20
+10
+e boar 380 -20
+10
+e boar 400 -20
+10
+e boar 420 -20
+10
+e boar 440 -20
+10
+e boar 460 -20
+10
+e boar 480 -20
+10
+e boar 500 -20
+10
+e boar 520 -20
+10
+e boar 540 -20
+10
+e boar 560 -20
+10
+e boar 580 -20
+10
+e boar 600 -20
+10
+e boar 620 -20
+10
+600

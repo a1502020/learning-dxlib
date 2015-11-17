@@ -11,7 +11,7 @@ namespace Stg
 {
     public class ShootingGame
     {
-        public ShootingGame(Key key)
+        public ShootingGame(Key key, string scriptPath)
         {
             OwnChar = new OwnCharacter(this, new Position(320.0, 400.0));
             OwnBullets = new List<Bullet>();
@@ -23,7 +23,7 @@ namespace Stg
 
             // スクリプト読み込み
             var loader = new ScriptLoader(this);
-            var script = loader.Load("scripts/test.txt");
+            var script = loader.Load(scriptPath);
             runner = new ScriptRunner(this, script);
         }
 
