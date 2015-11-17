@@ -14,7 +14,7 @@ namespace Stg.Script
             this.game = game;
             if (args.Count < 2)
             {
-                throw new FormatException();
+                throw new FormatException("e without enemy name.");
             }
             var name = args[1];
             if (name == "straight")

@@ -14,7 +14,7 @@ namespace Stg.Scenes
         {
             this.key = key;
 
-            scriptPaths = Directory.GetFiles("./scripts", "*.txt").ToList();
+            scriptPaths = Directory.GetFiles(scriptsDir, "*.txt").ToList();
             choices = scriptPaths
                 .Select(path => Path.GetFileNameWithoutExtension(path))
                 .ToList();

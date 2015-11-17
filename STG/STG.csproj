@@ -38,11 +38,15 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BossFactory.cs" />
     <Compile Include="Enemies\BoarEnemy.cs" />
     <Compile Include="Bullet.cs" />
     <Compile Include="DxDLL.cs" />
     <Compile Include="Enemies\BoarEnemyFactory.cs" />
+    <Compile Include="BossEnemy.cs" />
     <Compile Include="Enemies\StraightEnemyFactory.cs" />
+    <Compile Include="Enemies\TestBoss.cs" />
+    <Compile Include="Enemies\TestBossFactory.cs" />
     <Compile Include="Enemies\TurnEnemy.cs" />
     <Compile Include="Enemies\TurnEnemyFactory.cs" />
     <Compile Include="Enemy.cs" />
@@ -53,6 +57,7 @@
     <Compile Include="Scene.cs" />
     <Compile Include="Scenes\StgScene.cs" />
     <Compile Include="Scenes\TitleScene.cs" />
+    <Compile Include="Script\BossStatement.cs" />
     <Compile Include="Script\EnemyStatement.cs" />
     <Compile Include="Script\Script.cs" />
     <Compile Include="Script\ScriptLoader.cs" />

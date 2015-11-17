@@ -47,6 +47,12 @@ namespace Stg
             // 敵の弾
             EnemyBullets.ForEach(bullet => bullet.Update());
 
+            // ボス
+            if (Boss != null)
+            {
+                Boss.Update();
+            }
+
             // 画面外の弾を削除
             OwnBullets.RemoveAll(bullet =>
                 bullet.Position.X < -bullet.Radius
@@ -70,7 +76,6 @@ namespace Stg
                         bullet.Position.X, bullet.Position.Y, bullet.Radius,
                         enemy.Position.X, enemy.Position.Y, enemy.Radius))
                     {
-                        // 接触している
                         enemy.OnDamaged(bullet.Power);
                         OwnBullets.RemoveAt(bi);
                         break;
@@ -79,6 +84,22 @@ namespace Stg
             }
             Enemies.RemoveAll(enemy => enemy.Dead);
 
+            // ボスと弾の当たり判定
+            if (Boss != null)
+            {
+                for (var bi = OwnBullets.Count - 1; bi >= 0; --bi)
+                {
+                    var bullet = OwnBullets[bi];
+                    if (collidesCircleCircle(
+                        bullet.Position.X, bullet.Position.Y, bullet.Radius,
+                        Boss.Position.X, Boss.Position.Y, Boss.Radius))
+                    {
+                        Boss.OnDamaged(bullet.Power);
+                        OwnBullets.RemoveAt(bi);
+                    }
+                }
+            }
+
             // 自機と敵の当たり判定
             foreach (var enemy in Enemies)
             {
@@ -86,7 +107,17 @@ namespace Stg
                     OwnChar.Position.X, OwnChar.Position.Y, OwnChar.Radius,
                     enemy.Position.X, enemy.Position.Y, enemy.Radius))
                 {
-                    // 接触している
+                    finished = true;
+                }
+            }
+
+            // 自機とボスの当たり判定
+            if (Boss != null)
+            {
+                if (collidesCircleCircle(
+                    OwnChar.Position.X, OwnChar.Position.Y, OwnChar.Radius,
+                    Boss.Position.X, Boss.Position.Y, Boss.Radius))
+                {
                     finished = true;
                 }
             }
@@ -98,7 +129,6 @@ namespace Stg
                     OwnChar.Position.X, OwnChar.Position.Y, OwnChar.Radius,
                     bullet.Position.X, bullet.Position.Y, bullet.Radius))
                 {
-                    // 接触している
                     finished = true;
                 }
             }
@@ -114,6 +144,12 @@ namespace Stg
             OwnBullets.ForEach(bullet => bullet.Draw());
             EnemyBullets.ForEach(bullet => bullet.Draw());
             OwnChar.Draw();
+            if (Boss != null)
+            {
+                Boss.Draw();
+                DX.DrawFillBox(bossHpX1, bossHpY1, bossHpX1 + bossHpW, bossHpY1 + bossHpH, bossHpColBack);
+                DX.DrawFillBox(bossHpX1, bossHpY1, bossHpX1 + Boss.HP * bossHpW / Boss.MaxHP, bossHpY1 + bossHpH, bossHpCol);
+            }
         }
 
         /// <summary>
@@ -124,17 +160,30 @@ namespace Stg
             get { return finished; }
         }
 
-        // 自機
+        /// <summary>
+        /// 自機
+        /// </summary>
         public OwnCharacter OwnChar { get; private set; }
 
-        // 自機の弾
+        /// <summary>
+        /// 自機の弾
+        /// </summary>
         public List<Bullet> OwnBullets { get; private set; }
 
-        // 敵
+        /// <summary>
+        /// 敵
+        /// </summary>
         public List<Enemy> Enemies { get; private set; }
 
-        // 敵の弾
+        /// <summary>
+        /// 敵の弾
+        /// </summary>
         public List<Bullet> EnemyBullets { get; private set; }
+
+        /// <summary>
+        /// ボス(出現していないときは null)
+        /// </summary>
+        public BossEnemy Boss { get; set; }
 
         /// <summary>
         /// 乱数
@@ -167,6 +216,10 @@ namespace Stg
 
         // 画像
         private int imgBack;
+
+        // ボスの HP 表示領域
+        private int bossHpX1 = 4, bossHpY1 = 4, bossHpW = 632, bossHpH = 12;
+        private uint bossHpColBack = DX.GetColor(128, 64, 64), bossHpCol = DX.GetColor(255, 0, 0);
 
         private ScriptRunner runner;
     }

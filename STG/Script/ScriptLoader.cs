@@ -39,6 +39,10 @@ namespace Stg.Script
                 {
                     res.Statements.Add(new EnemyStatement(game, sp));
                 }
+                else if (c == "b")
+                {
+                    res.Statements.Add(new BossStatement(game, sp));
+                }
             }
             return res;
         }
