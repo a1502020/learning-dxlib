@@ -9,11 +9,11 @@ namespace Stg.Enemies
 {
     public class BoarEnemy : Enemy
     {
-        public BoarEnemy(ShootingGame game)
+        public BoarEnemy(ShootingGame game, Position pos)
             : base(game)
         {
+            this.Position = pos.Clone();
             Radius = 20;
-            Position = new Position(game.Rnd.Next(Radius, 640 - Radius), -Radius);
             color = DX.GetColor(255, 128, 0);
             speed = 3.0;
             angle = Math.Atan2(game.OwnChar.Position.Y - Position.Y, game.OwnChar.Position.X - Position.X);

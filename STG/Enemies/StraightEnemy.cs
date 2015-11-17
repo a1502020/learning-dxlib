@@ -7,19 +7,20 @@ using System.Threading.Tasks;
 
 namespace Stg.Enemies
 {
-    public class SimpleEnemy : Enemy
+    public class StraightEnemy : Enemy
     {
         /// <summary>
-        /// SimpleEnemy を初期化する。
+        /// StraightEnemy を初期化する。
         /// </summary>
-        public SimpleEnemy(ShootingGame game)
+        public StraightEnemy(ShootingGame game, Position pos, double angle, double speed, int interval)
             : base(game)
         {
             Radius = 20;
-            Position = new Position(game.Rnd.Next(Radius, 640 - Radius), -Radius);
             Color = DX.GetColor(0, 0, 255);
-            speed = 3.0;
-            angle = Math.PI / 2;
+            this.Position = pos.Clone();
+            this.Angle = angle;
+            this.Speed = speed;
+            this.Interval = interval;
         }
 
         /// <summary>
@@ -30,12 +31,12 @@ namespace Stg.Enemies
         public override void Update()
         {
             // 移動
-            Position.X += speed * Math.Cos(angle);
-            Position.Y += speed * Math.Sin(angle);
+            Position.X += Speed * Math.Cos(Angle);
+            Position.Y += Speed * Math.Sin(Angle);
 
             // 弾を撃つ
             ++frameCnt;
-            if (frameCnt == 40)
+            if (frameCnt == Interval)
             {
                 frameCnt = 0;
                 var bulletAngle = Math.Atan2(Game.OwnChar.Position.Y - Position.Y, Game.OwnChar.Position.X - Position.X);
@@ -56,11 +57,20 @@ namespace Stg.Enemies
         /// </summary>
         public uint Color { get; protected set; }
 
-        // 進行方向[rad]
-        private double angle;
+        /// <summary>
+        /// 進行方向[rad]
+        /// </summary>
+        public double Angle { get; private set; }
 
-        // 速度[px/frame]
-        private double speed;
+        /// <summary>
+        /// 速度[px/frame]
+        /// </summary>
+        public double Speed { get; private set; }
+
+        /// <summary>
+        /// 弾の発射間隔[frame]
+        /// </summary>
+        public int Interval { get; private set; }
 
         private int frameCnt = 0;
     }

@@ -42,7 +42,7 @@
     <Compile Include="Bullet.cs" />
     <Compile Include="DxDLL.cs" />
     <Compile Include="Enemies\BoarEnemyFactory.cs" />
-    <Compile Include="Enemies\SimpleEnemyFactory.cs" />
+    <Compile Include="Enemies\StraightEnemyFactory.cs" />
     <Compile Include="Enemies\TurnEnemy.cs" />
     <Compile Include="Enemies\TurnEnemyFactory.cs" />
     <Compile Include="Enemy.cs" />
@@ -60,7 +60,7 @@
     <Compile Include="Script\Statement.cs" />
     <Compile Include="Script\WaitStatement.cs" />
     <Compile Include="ShootingGame.cs" />
-    <Compile Include="Enemies\SimpleEnemy.cs" />
+    <Compile Include="Enemies\StraightEnemy.cs" />
     <Compile Include="StgMain.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -17,13 +17,30 @@ namespace Stg.Script
                 throw new FormatException();
             }
             var name = args[1];
-            if (name == "simple")
+            if (name == "straight")
             {
-                factory = new SimpleEnemyFactory(game);
+                if (args.Count < 2 + 5)
+                {
+                    throw new FormatException("e straight with too few arguments.");
+                }
+                factory = new StraightEnemyFactory(game)
+                {
+                    Position = new Position(double.Parse(args[2]), double.Parse(args[3])),
+                    Angle = double.Parse(args[4]) * Math.PI / 180,
+                    Speed = double.Parse(args[5]),
+                    Interval = int.Parse(args[6]),
+                };
             }
             else if (name == "boar")
             {
-                factory = new BoarEnemyFactory(game);
+                if (args.Count < 2 + 2)
+                {
+                    throw new FormatException("e boar with too few arguments.");
+                }
+                factory = new BoarEnemyFactory(game)
+                {
+                    Position = new Position(double.Parse(args[2]), double.Parse(args[3])),
+                };
             }
             else if (name == "turn")
             {

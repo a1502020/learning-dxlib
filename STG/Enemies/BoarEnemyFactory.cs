@@ -15,8 +15,13 @@ namespace Stg.Enemies
 
         public override Enemy Create()
         {
-            return new BoarEnemy(game);
+            return new BoarEnemy(game, Position);
         }
+
+        /// <summary>
+        /// 初期位置
+        /// </summary>
+        public Position Position { get; set; }
 
         private ShootingGame game;
     }
