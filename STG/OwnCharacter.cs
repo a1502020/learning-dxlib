@@ -22,7 +22,7 @@ namespace Stg
             Radius = 9;
             speed = 5.0;
             img = DX.LoadGraph("img/own.bmp");
-            bulletFrame = 0;
+            bulletFrame = 6;
         }
 
         /// <summary>
