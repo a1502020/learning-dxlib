@@ -1,5 +1,4 @@
 ﻿60
-e boar 320 240
 e straight 25 -20 90 2.0 60
 e straight 615 -20 90 2.0 60
 60
