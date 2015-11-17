@@ -72,6 +72,9 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="bgm\このフォルダにBGMの音声ファイルを置く.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="img\back.bmp">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

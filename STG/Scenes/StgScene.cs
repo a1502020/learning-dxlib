@@ -19,9 +19,15 @@ namespace Stg.Scenes
 
         public override void Update()
         {
+            if (first)
+            {
+                game.BeginScript();
+                first = false;
+            }
             game.Update();
             if (game.Finished)
             {
+                game.EndScript();
                 NextScene = new TitleScene(key);
             }
         }
@@ -35,5 +41,6 @@ namespace Stg.Scenes
 
         private ShootingGame game;
         private Key key;
+        private bool first = true;
     }
 }

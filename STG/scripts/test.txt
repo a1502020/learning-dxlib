@@ -1,4 +1,6 @@
-﻿60
+﻿bgm bgm1.mp3 noloop
+--
+60
 e straight 25 -20 90 2.0 60
 e straight 615 -20 90 2.0 60
 60

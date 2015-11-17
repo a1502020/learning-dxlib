@@ -1,5 +1,7 @@
-﻿using System;
+﻿using DxLibDLL;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +14,29 @@ namespace Stg.Script
         {
             this.game = game;
             this.Script = script;
+        }
+
+        public void Begin()
+        {
+            if (string.IsNullOrEmpty(Script.Bgm))
+            {
+                bgm = -1;
+            }
+            else
+            {
+                bgm = DX.LoadMusicMem(Path.Combine("bgm", Script.Bgm));
+                DX.PlayMusicMem(bgm, Script.BgmLoop ? DX.DX_PLAYTYPE_LOOP : DX.DX_PLAYTYPE_BACK);
+            }
+        }
+
+        public void End()
+        {
+            if (bgm != -1)
+            {
+                DX.StopMusicMem(bgm);
+                DX.DeleteMusicMem(bgm);
+                bgm = -1;
+            }
         }
 
         public void Step()
@@ -37,5 +62,7 @@ namespace Stg.Script
 
         private int pc = 0;
         private int waitTime = 0;
+
+        private int bgm;
     }
 }

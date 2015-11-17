@@ -18,6 +18,7 @@ namespace Stg.Script
         public Script Load(StreamReader reader)
         {
             var res = new Script();
+            var readingBody = false;
             while (reader.Peek() >= 0)
             {
                 var line = reader.ReadLine();
@@ -25,23 +26,19 @@ namespace Stg.Script
                 {
                     continue;
                 }
-
-                int time;
-                if (int.TryParse(line, out time))
+                if (line == "--")
                 {
-                    res.Statements.Add(new WaitStatement(time));
+                    readingBody = true;
                     continue;
                 }
 
-                var sp = line.Split(' ').ToList();
-                var c = sp[0];
-                if (c == "e")
+                if (readingBody)
                 {
-                    res.Statements.Add(new EnemyStatement(game, sp));
+                    readBody(line, res);
                 }
-                else if (c == "b")
+                else
                 {
-                    res.Statements.Add(new BossStatement(game, sp));
+                    readHeader(line, res);
                 }
             }
             return res;
@@ -56,5 +53,44 @@ namespace Stg.Script
         }
 
         private ShootingGame game;
+
+        private void readHeader(string line, Script res)
+        {
+            var sp = line.Split(' ').ToList();
+            var cmd = sp[0];
+            if (cmd == "bgm")
+            {
+                if (sp.Count < 2)
+                {
+                    throw new FormatException("bgm with too few arguments.");
+                }
+                res.Bgm = sp[1];
+                res.BgmLoop = (sp.Count < 3 || sp[2] == "loop");
+            }
+            else
+            {
+                throw new FormatException(string.Format("unknown header \"{0}\"", cmd));
+            }
+        }
+
+        private void readBody(string line, Script res)
+        {
+            int time;
+            if (int.TryParse(line, out time))
+            {
+                res.Statements.Add(new WaitStatement(time));
+                return;
+            }
+            var sp = line.Split(' ').ToList();
+            var c = sp[0];
+            if (c == "e")
+            {
+                res.Statements.Add(new EnemyStatement(game, sp));
+            }
+            else if (c == "b")
+            {
+                res.Statements.Add(new BossStatement(game, sp));
+            }
+        }
     }
 }

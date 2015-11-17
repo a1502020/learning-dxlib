@@ -28,6 +28,22 @@ namespace Stg
         }
 
         /// <summary>
+        /// スクリプトの実行開始処理を行う。
+        /// </summary>
+        public void BeginScript()
+        {
+            runner.Begin();
+        }
+
+        /// <summary>
+        /// スクリプトの実行終了処理を行う。
+        /// </summary>
+        public void EndScript()
+        {
+            runner.End();
+        }
+
+        /// <summary>
         /// 1フレームぶんの処理を行う。
         /// </summary>
         public void Update()

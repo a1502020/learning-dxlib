@@ -14,5 +14,8 @@ namespace Stg.Script
         }
 
         public List<Statement> Statements { get; private set; }
+
+        public string Bgm { get; set; }
+        public bool BgmLoop { get; set; }
     }
 }
