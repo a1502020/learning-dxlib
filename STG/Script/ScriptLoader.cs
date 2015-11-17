@@ -21,7 +21,7 @@ namespace Stg.Script
             while (reader.Peek() >= 0)
             {
                 var line = reader.ReadLine();
-                if (line == "")
+                if (line == "" || line.StartsWith("//"))
                 {
                     continue;
                 }
