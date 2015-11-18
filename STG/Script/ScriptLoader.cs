@@ -15,6 +15,12 @@ namespace Stg.Script
             this.game = game;
         }
 
+        /// <summary>
+        /// スクリプトを読み込む。
+        /// </summary>
+        /// <param name="reader">スクリプトの入力ストリーム</param>
+        /// <returns>読み込んだスクリプト</returns>
+        /// <exception cref="FormatException"></exception>
         public Script Load(StreamReader reader)
         {
             var res = new Script();
@@ -50,6 +56,12 @@ namespace Stg.Script
             return res;
         }
 
+        /// <summary>
+        /// スクリプトを読み込む。
+        /// </summary>
+        /// <param name="filePath">スクリプトのファイルパス</param>
+        /// <returns>読み込んだスクリプト</returns>
+        /// <exception cref="FormatException"></exception>
         public Script Load(string filePath)
         {
             using (var reader = new StreamReader(filePath))
@@ -79,6 +91,7 @@ namespace Stg.Script
                 {
                     throw new FormatException("time with too few arguments.");
                 }
+
                 if (sp[1] == "frame")
                 {
                     res.Time = Script.TimeType.Frame;
@@ -102,6 +115,7 @@ namespace Stg.Script
                 {
                     throw new FormatException("color with too few arguments.");
                 }
+
                 res.BackR = int.Parse(sp[1]);
                 res.BackG = int.Parse(sp[2]);
                 res.BackB = int.Parse(sp[3]);

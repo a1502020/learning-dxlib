@@ -16,9 +16,14 @@ namespace Stg.Script
             this.Script = script;
         }
 
+        /// <summary>
+        /// スクリプトの実行開始処理を行う。
+        /// </summary>
         public void Begin()
         {
             Tasks = new List<ScriptTask>();
+
+            // BGM 読み込み
             if (string.IsNullOrEmpty(Script.Bgm))
             {
                 bgm = -1;
@@ -28,11 +33,20 @@ namespace Stg.Script
                 bgm = DX.LoadSoundMem(Path.Combine("bgm", Script.Bgm));
                 DX.PlaySoundMem(bgm, Script.BgmLoop ? DX.DX_PLAYTYPE_LOOP : DX.DX_PLAYTYPE_BACK);
             }
+
+            // 背景色
             game.BackR = Script.BackR;
             game.BackG = Script.BackG;
             game.BackB = Script.BackB;
+
+            // 待ち時間制御用変数
+            waitTime = 0;
+            time = 0;
         }
 
+        /// <summary>
+        /// スクリプトの実行終了処理を行う。
+        /// </summary>
         public void End()
         {
             if (bgm != -1)
@@ -43,8 +57,12 @@ namespace Stg.Script
             }
         }
 
+        /// <summary>
+        /// スクリプトを1フレームぶん実行する。
+        /// </summary>
         public void Step()
         {
+            // 1フレームぶんのスクリプトを実行
             while (pc < Script.Statements.Count && waitTime <= 0)
             {
                 var st = Script.Statements[pc];
@@ -59,34 +77,43 @@ namespace Stg.Script
             Tasks.ForEach(task => task.Update());
             Tasks.RemoveAll(task => task.Done);
 
-            switch (Script.Time)
+            // 時間待ち
+            if (Script.Time == Script.TimeType.Frame)
             {
-                case Script.TimeType.Frame:
-                    if (waitTime > 0)
-                    {
-                        --waitTime;
-                    }
-                    break;
-                case Script.TimeType.BgmSample:
-                    waitTime = time - DX.GetSoundCurrentPosition(bgm);
-                    break;
-                case Stg.Script.Script.TimeType.BgmTime:
-                    waitTime = time - DX.GetSoundCurrentTime(bgm);
-                    break;
+                if (waitTime > 0)
+                {
+                    --waitTime;
+                }
+            }
+            if (Script.Time == Script.TimeType.BgmSample)
+            {
+                waitTime = time - DX.GetSoundCurrentPosition(bgm);
+            }
+            if (Script.Time == Script.TimeType.BgmTime)
+            {
+                waitTime = time - DX.GetSoundCurrentTime(bgm);
             }
         }
 
+        /// <summary>
+        /// スクリプトの実行が終了したか否か
+        /// </summary>
         public bool Finished { get { return pc >= Script.Statements.Count && waitTime <= 0; } }
 
+        /// <summary>
+        /// スクリプト
+        /// </summary>
         public Script Script { get; private set; }
 
+        /// <summary>
+        /// 2フレーム以上にわたって行われる処理
+        /// </summary>
         public List<ScriptTask> Tasks { get; private set; }
 
         private ShootingGame game;
 
         private int pc = 0;
-        private int time = 0;
-        private int waitTime = 0;
+        private int time = 0, waitTime = 0;
 
         private int bgm;
     }
