@@ -153,6 +153,12 @@ namespace Stg
                     failed = !DebugMode;
                 }
             }
+
+            // R キーで自滅
+            if (key.IsPressed(DX.KEY_INPUT_R))
+            {
+                failed = true;
+            }
         }
 
         /// <summary>
