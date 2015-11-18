@@ -18,6 +18,7 @@ namespace Stg.Script
 
         public void Begin()
         {
+            Tasks = new List<ScriptTask>();
             if (string.IsNullOrEmpty(Script.Bgm))
             {
                 bgm = -1;
@@ -27,6 +28,9 @@ namespace Stg.Script
                 bgm = DX.LoadSoundMem(Path.Combine("bgm", Script.Bgm));
                 DX.PlaySoundMem(bgm, Script.BgmLoop ? DX.DX_PLAYTYPE_LOOP : DX.DX_PLAYTYPE_BACK);
             }
+            game.BackR = Script.BackR;
+            game.BackG = Script.BackG;
+            game.BackB = Script.BackB;
         }
 
         public void End()
@@ -44,10 +48,17 @@ namespace Stg.Script
             while (pc < Script.Statements.Count && waitTime <= 0)
             {
                 var st = Script.Statements[pc];
-                st.Run();
+                var task = st.Run();
+                if (task != null)
+                {
+                    Tasks.Add(task);
+                }
                 time = waitTime = st.WaitTime;
                 ++pc;
             }
+            Tasks.ForEach(task => task.Update());
+            Tasks.RemoveAll(task => task.Done);
+
             switch (Script.Time)
             {
                 case Script.TimeType.Frame:
@@ -68,6 +79,8 @@ namespace Stg.Script
         public bool Finished { get { return pc >= Script.Statements.Count && waitTime <= 0; } }
 
         public Script Script { get; private set; }
+
+        public List<ScriptTask> Tasks { get; private set; }
 
         private ShootingGame game;
 

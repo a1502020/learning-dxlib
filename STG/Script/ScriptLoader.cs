@@ -90,6 +90,16 @@ namespace Stg.Script
                     throw new FormatException("time with invalid arguments.");
                 }
             }
+            else if (cmd == "color")
+            {
+                if (sp.Count < 4)
+                {
+                    throw new FormatException("color with too few arguments.");
+                }
+                res.BackR = int.Parse(sp[1]);
+                res.BackG = int.Parse(sp[2]);
+                res.BackB = int.Parse(sp[3]);
+            }
             else
             {
                 throw new FormatException(string.Format("unknown header \"{0}\"", cmd));
@@ -113,6 +123,10 @@ namespace Stg.Script
             else if (c == "b")
             {
                 res.Statements.Add(new BossStatement(game, sp));
+            }
+            else if (c == "color")
+            {
+                res.Statements.Add(new ColorStatement(game, sp));
             }
         }
     }

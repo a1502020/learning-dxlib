@@ -13,8 +13,9 @@ namespace Stg.Script
             this.time = time;
         }
 
-        public override void Run()
+        public override ScriptTask Run()
         {
+            return null;
         }
 
         public override int WaitTime { get { return time; } }

@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Stg.Script
 {
-    public abstract class Statement
+    public abstract class ScriptTask
     {
-        public abstract ScriptTask Run();
-        public virtual int WaitTime { get { return 0; } }
+        public abstract void Update();
+        public abstract bool Done { get; }
     }
 }

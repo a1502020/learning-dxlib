@@ -18,7 +18,7 @@ namespace Stg
             Enemies = new List<Enemy>();
             EnemyBullets = new List<Bullet>();
 
-            imgBack = DX.LoadGraph("img/back.bmp");
+            imgBack = DX.LoadGraph("img/back1.bmp");
             this.key = key;
 
             // スクリプト読み込み
@@ -155,7 +155,11 @@ namespace Stg
         /// </summary>
         public void Draw()
         {
+            // 背景
+            DX.SetDrawBright(BackR, BackG, BackB);
             DX.DrawGraph(0, 0, imgBack, DX.FALSE);
+            DX.SetDrawBright(255, 255, 255);
+
             Enemies.ForEach(enemy => enemy.Draw());
             OwnBullets.ForEach(bullet => bullet.Draw());
             EnemyBullets.ForEach(bullet => bullet.Draw());
@@ -205,6 +209,21 @@ namespace Stg
         /// 乱数
         /// </summary>
         public Random Rnd = new Random();
+
+        /// <summary>
+        /// 背景の赤色成分
+        /// </summary>
+        public int BackR { get; set; }
+
+        /// <summary>
+        /// 背景の緑色成分
+        /// </summary>
+        public int BackG { get; set; }
+
+        /// <summary>
+        /// 背景の青色成分
+        /// </summary>
+        public int BackB { get; set; }
 
         // キー入力
         private Key key;

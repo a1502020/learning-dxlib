@@ -64,9 +64,10 @@ namespace Stg.Script
             }
         }
 
-        public override void Run()
+        public override ScriptTask Run()
         {
             game.Enemies.Add(factory.Create());
+            return null;
         }
 
         private ShootingGame game;

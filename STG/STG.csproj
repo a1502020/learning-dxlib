@@ -57,11 +57,14 @@
     <Compile Include="Scene.cs" />
     <Compile Include="Scenes\StgScene.cs" />
     <Compile Include="Scenes\TitleScene.cs" />
+    <Compile Include="Script\BackColorTask.cs" />
     <Compile Include="Script\BossStatement.cs" />
+    <Compile Include="Script\ColorStatement.cs" />
     <Compile Include="Script\EnemyStatement.cs" />
     <Compile Include="Script\Script.cs" />
     <Compile Include="Script\ScriptLoader.cs" />
     <Compile Include="Script\ScriptRunner.cs" />
+    <Compile Include="Script\ScriptTask.cs" />
     <Compile Include="Script\Statement.cs" />
     <Compile Include="Script\WaitStatement.cs" />
     <Compile Include="ShootingGame.cs" />

@@ -27,9 +27,10 @@ namespace Stg.Script
             }
         }
 
-        public override void Run()
+        public override ScriptTask Run()
         {
             game.Boss = factory.Create();
+            return null;
         }
 
         private ShootingGame game;
