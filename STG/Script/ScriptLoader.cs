@@ -22,7 +22,13 @@ namespace Stg.Script
             while (reader.Peek() >= 0)
             {
                 var line = reader.ReadLine();
-                if (line == "" || line.StartsWith("//"))
+                var pos = line.IndexOf("//");
+                if (pos >= 0)
+                {
+                    line = line.Substring(0, pos);
+                }
+                line = line.Trim();
+                if (line == "")
                 {
                     continue;
                 }
