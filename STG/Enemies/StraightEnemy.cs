@@ -40,7 +40,7 @@ namespace Stg.Enemies
             {
                 frameCnt = 0;
                 var bulletAngle = Math.Atan2(Game.OwnChar.Position.Y - Position.Y, Game.OwnChar.Position.X - Position.X);
-                Game.EnemyBullets.Add(new Bullet(1, Position, 10, bulletAngle, 5.0, DX.GetColor(128, 255, 255)));
+                Game.EnemyBullets.Add(new Bullet(1, Position, 10, bulletAngle, 5.0, DX.GetColor(255, 255, 0)));
             }
 
             // 画面外に出たら消える
