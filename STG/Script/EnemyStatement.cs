@@ -112,6 +112,25 @@ namespace Stg.Script
                     EndAngle = double.Parse(args[14]) * Math.PI / 180,
                 };
             }
+            else if (name == "random_walker")
+            {
+                if (args.Count < 2 + 11)
+                {
+                    throw new FormatException("e random_walker with too few arguments.");
+                }
+                factory = new RandomWalkerEnemyFactory(game)
+                {
+                    RangeX1 = int.Parse(args[2]),
+                    RangeY1 = int.Parse(args[3]),
+                    RangeX2 = int.Parse(args[4]),
+                    RangeY2 = int.Parse(args[5]),
+                    StartPos = new Position(double.Parse(args[6]), double.Parse(args[7])),
+                    EndPos = new Position(double.Parse(args[8]), double.Parse(args[9])),
+                    MoveFrame = int.Parse(args[10]),
+                    StopFrame = int.Parse(args[11]),
+                    MoveCount = int.Parse(args[12]),
+                };
+            }
             else
             {
                 throw new FormatException(string.Format("Unknown enemy name \"{0}\"", name));

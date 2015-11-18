@@ -44,6 +44,8 @@
     <Compile Include="DxDLL.cs" />
     <Compile Include="Enemies\BoarEnemyFactory.cs" />
     <Compile Include="BossEnemy.cs" />
+    <Compile Include="Enemies\RandomWalkerEnemy.cs" />
+    <Compile Include="Enemies\RandomWalkerEnemyFactory.cs" />
     <Compile Include="Enemies\StraightEnemyFactory.cs" />
     <Compile Include="Enemies\StraightSEnemy.cs" />
     <Compile Include="Enemies\StraightSEnemyFactory.cs" />
