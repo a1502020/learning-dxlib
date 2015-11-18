@@ -21,10 +21,16 @@ namespace Stg
             this.key = key;
 
             // スクリプト読み込み
+            this.ScriptPath = scriptPath;
             var loader = new ScriptLoader(this);
-            var script = loader.Load(scriptPath);
+            var script = loader.Load(this.ScriptPath);
             runner = new ScriptRunner(this, script);
         }
+
+        /// <summary>
+        /// スクリプトのファイルパス
+        /// </summary>
+        public string ScriptPath { get; private set; }
 
         /// <summary>
         /// スクリプトの実行開始処理を行う。
@@ -122,7 +128,7 @@ namespace Stg
                     OwnChar.Position.X, OwnChar.Position.Y, OwnChar.Radius,
                     enemy.Position.X, enemy.Position.Y, enemy.Radius))
                 {
-                    finished = !DebugMode;
+                    failed = !DebugMode;
                 }
             }
 
@@ -133,7 +139,7 @@ namespace Stg
                     OwnChar.Position.X, OwnChar.Position.Y, OwnChar.Radius,
                     Boss.Position.X, Boss.Position.Y, Boss.Radius))
                 {
-                    finished = !DebugMode;
+                    failed = !DebugMode;
                 }
             }
 
@@ -144,7 +150,7 @@ namespace Stg
                     OwnChar.Position.X, OwnChar.Position.Y, OwnChar.Radius,
                     bullet.Position.X, bullet.Position.Y, bullet.Radius))
                 {
-                    finished = !DebugMode;
+                    failed = !DebugMode;
                 }
             }
         }
@@ -172,11 +178,19 @@ namespace Stg
         }
 
         /// <summary>
-        /// ゲームが終了したか否か
+        /// やられた
         /// </summary>
-        public bool Finished
+        public bool Failed
         {
-            get { return finished; }
+            get { return failed; }
+        }
+
+        /// <summary>
+        /// クリアした
+        /// </summary>
+        public bool Clear
+        {
+            get { return runner.Finished; }
         }
 
         /// <summary>
@@ -260,7 +274,7 @@ namespace Stg
         }
 
         // 終了フラグ
-        private bool finished = false;
+        private bool failed = false;
 
         // 画像
         private int imgBack = -1;

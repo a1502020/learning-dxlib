@@ -63,6 +63,7 @@
     <Compile Include="OwnCharacter.cs" />
     <Compile Include="Position.cs" />
     <Compile Include="Scene.cs" />
+    <Compile Include="Scenes\ClearScene.cs" />
     <Compile Include="Scenes\StgScene.cs" />
     <Compile Include="Scenes\TitleScene.cs" />
     <Compile Include="Script\BackColorTask.cs" />

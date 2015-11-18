@@ -25,7 +25,12 @@ namespace Stg.Scenes
                 first = false;
             }
             game.Update();
-            if (game.Finished)
+            if (game.Clear)
+            {
+                game.EndScript();
+                NextScene = new ClearScene(key, game);
+            }
+            else if (game.Failed)
             {
                 game.EndScript();
                 NextScene = new TitleScene(key);
