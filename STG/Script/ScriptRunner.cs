@@ -46,6 +46,9 @@ namespace Stg.Script
             waitTime = 0;
             time = 0;
             prevTime = 0;
+
+            // デバッグモード
+            game.DebugMode = Script.DebugMode;
         }
 
         /// <summary>

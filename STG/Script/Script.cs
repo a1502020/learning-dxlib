@@ -11,6 +11,7 @@ namespace Stg.Script
         public Script()
         {
             Statements = new List<Statement>();
+            DebugMode = false;
             Background = "default.bmp";
             BackR = 255;
             BackG = 255;
@@ -18,6 +19,11 @@ namespace Stg.Script
         }
 
         public List<Statement> Statements { get; private set; }
+
+        /// <summary>
+        /// デバッグモード
+        /// </summary>
+        public bool DebugMode { get; set; }
 
         /// <summary>
         /// BGM のファイル名

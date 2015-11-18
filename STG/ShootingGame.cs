@@ -122,7 +122,7 @@ namespace Stg
                     OwnChar.Position.X, OwnChar.Position.Y, OwnChar.Radius,
                     enemy.Position.X, enemy.Position.Y, enemy.Radius))
                 {
-                    finished = true;
+                    finished = !DebugMode;
                 }
             }
 
@@ -133,7 +133,7 @@ namespace Stg
                     OwnChar.Position.X, OwnChar.Position.Y, OwnChar.Radius,
                     Boss.Position.X, Boss.Position.Y, Boss.Radius))
                 {
-                    finished = true;
+                    finished = !DebugMode;
                 }
             }
 
@@ -144,7 +144,7 @@ namespace Stg
                     OwnChar.Position.X, OwnChar.Position.Y, OwnChar.Radius,
                     bullet.Position.X, bullet.Position.Y, bullet.Radius))
                 {
-                    finished = true;
+                    finished = !DebugMode;
                 }
             }
         }
@@ -232,6 +232,11 @@ namespace Stg
         {
             imgBack = DX.LoadGraph(path);
         }
+
+        /// <summary>
+        /// デバッグモード
+        /// </summary>
+        public bool DebugMode { get; set; }
 
         // キー入力
         private Key key;

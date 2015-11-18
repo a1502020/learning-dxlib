@@ -76,7 +76,11 @@ namespace Stg.Script
         {
             var sp = line.Split(' ').ToList();
             var cmd = sp[0];
-            if (cmd == "bgm")
+            if (cmd == "debugmode")
+            {
+                res.DebugMode = true;
+            }
+            else if (cmd == "bgm")
             {
                 if (sp.Count < 2)
                 {
