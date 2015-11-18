@@ -42,6 +42,7 @@ namespace Stg.Script
             // 待ち時間制御用変数
             waitTime = 0;
             time = 0;
+            prevTime = 0;
         }
 
         /// <summary>
@@ -71,7 +72,11 @@ namespace Stg.Script
                 {
                     Tasks.Add(task);
                 }
-                time = waitTime = st.WaitTime;
+                if (st.WaitTime > 0)
+                {
+                    prevTime += time;
+                    time = waitTime = st.WaitTime;
+                }
                 ++pc;
             }
             Tasks.ForEach(task => task.Update());
@@ -87,11 +92,11 @@ namespace Stg.Script
             }
             if (Script.Time == Script.TimeType.BgmSample)
             {
-                waitTime = time - DX.GetSoundCurrentPosition(bgm);
+                waitTime = time - (DX.GetSoundCurrentPosition(bgm) - prevTime);
             }
             if (Script.Time == Script.TimeType.BgmTime)
             {
-                waitTime = time - DX.GetSoundCurrentTime(bgm);
+                waitTime = time - (DX.GetSoundCurrentTime(bgm) - prevTime);
             }
         }
 
@@ -113,7 +118,7 @@ namespace Stg.Script
         private ShootingGame game;
 
         private int pc = 0;
-        private int time = 0, waitTime = 0;
+        private int time = 0, waitTime = 0, prevTime = 0;
 
         private int bgm;
     }
