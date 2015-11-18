@@ -32,8 +32,9 @@ namespace Stg.Scenes
         {
             game.Draw();
 
-            drawStringWithShadow(string.Format("Stage {0} Clear!", scriptName), 8, 8);
-            drawStringWithShadow("(Press Z to back to title screen)", 8, 26);
+            drawStringWithShadow(scriptName, 8, 8);
+            drawStringWithShadow(string.Format("Stage Clear!", scriptName), 8, 26);
+            drawStringWithShadow("(Press Z to back to title screen)", 8, 44);
         }
 
         public override Scene NextScene { get; protected set; }
