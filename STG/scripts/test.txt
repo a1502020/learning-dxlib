@@ -1,5 +1,4 @@
-﻿debugmode
-bgm bgm1.mp3 noloop
+﻿bgm bgm1.mp3 noloop
 back back1.bmp
 time bgm_time
 color 0 0 0
@@ -728,6 +727,7 @@ color 0 0 0 164
 606
 606
 606
+303
 606
 
 // [71]

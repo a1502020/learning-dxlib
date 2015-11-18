@@ -39,7 +39,7 @@ namespace Stg.Scenes
                     cursor = choices.Count - 1;
                 }
             }
-            if (key.IsPressed(DX.KEY_INPUT_SPACE))
+            if (key.IsPressed(DX.KEY_INPUT_Z))
             {
                 if (cursor < scriptPaths.Count)
                 {

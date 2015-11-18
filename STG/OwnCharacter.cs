@@ -21,6 +21,7 @@ namespace Stg
             Position = pos.Clone();
             Radius = 9;
             speed = 5.0;
+            slowSpeed = 2.0;
             img = DX.LoadGraph("img/own.bmp");
             bulletFrame = 6;
         }
@@ -32,21 +33,22 @@ namespace Stg
         public void Update(Key key)
         {
             // 移動(斜め移動が速くなるのは気にしないことにした)
+            var currentSpeed = key.IsPressing(DX.KEY_INPUT_LSHIFT) ? slowSpeed : speed;
             if (key.IsPressing(DX.KEY_INPUT_UP))
             {
-                Position.Y -= speed;
+                Position.Y -= currentSpeed;
             }
             if (key.IsPressing(DX.KEY_INPUT_LEFT))
             {
-                Position.X -= speed;
+                Position.X -= currentSpeed;
             }
             if (key.IsPressing(DX.KEY_INPUT_DOWN))
             {
-                Position.Y += speed;
+                Position.Y += currentSpeed;
             }
             if (key.IsPressing(DX.KEY_INPUT_RIGHT))
             {
-                Position.X += speed;
+                Position.X += currentSpeed;
             }
 
             // 画面外に行かないようにする
@@ -68,7 +70,7 @@ namespace Stg
             }
 
             // 弾を発射
-            if (bulletFrame == 0 && key.IsPressing(DX.KEY_INPUT_SPACE))
+            if (bulletFrame == 0 && key.IsPressing(DX.KEY_INPUT_Z))
             {
                 game.OwnBullets.Add(new Bullet(1, Position, 5, 3 * Math.PI / 2, 10.0, DX.GetColor(255, 255, 0)));
                 bulletFrame = 12;
@@ -103,7 +105,7 @@ namespace Stg
         private int img;
 
         // 速度[px/frame]
-        private double speed;
+        private double speed, slowSpeed;
 
         // 弾の発射間隔カウンタ
         private int bulletFrame;
