@@ -60,6 +60,24 @@ namespace Stg.Script
                     BulletsCount = int.Parse(args[12]),
                 };
             }
+            else if (name == "turn_s")
+            {
+                if (args.Count < 2 + 11)
+                {
+                    throw new FormatException("e turn_s with too few arguments.");
+                }
+                factory = new TurnSEnemyFactory(game)
+                {
+                    StartPos = new Position(double.Parse(args[2]), double.Parse(args[3])),
+                    StartTime = int.Parse(args[4]),
+                    StopPos = new Position(double.Parse(args[5]), double.Parse(args[6])),
+                    StopTime = int.Parse(args[7]),
+                    LeavePos = new Position(double.Parse(args[8]), double.Parse(args[9])),
+                    LeaveTime = int.Parse(args[10]),
+                    Interval = int.Parse(args[11]),
+                    BulletsCount = int.Parse(args[12]),
+                };
+            }
             else
             {
                 throw new FormatException(string.Format("Unknown enemy name \"{0}\"", name));

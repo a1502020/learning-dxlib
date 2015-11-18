@@ -157,6 +157,10 @@ namespace Stg.Script
             {
                 res.Statements.Add(new ColorStatement(game, sp));
             }
+            else
+            {
+                throw new FormatException(string.Format("unknown command {0}", c));
+            }
         }
     }
 }

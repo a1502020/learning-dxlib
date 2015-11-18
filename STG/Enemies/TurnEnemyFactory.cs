@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Stg.Enemies
 {
-    class TurnEnemyFactory : EnemyFactory
+    public class TurnEnemyFactory : EnemyFactory
     {
         public TurnEnemyFactory(ShootingGame game)
         {
