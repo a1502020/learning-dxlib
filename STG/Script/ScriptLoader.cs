@@ -120,6 +120,15 @@ namespace Stg.Script
                 res.BackG = int.Parse(sp[2]);
                 res.BackB = int.Parse(sp[3]);
             }
+            else if (cmd == "back")
+            {
+                if (sp.Count < 2)
+                {
+                    throw new FormatException("back with too few arguments.");
+                }
+
+                res.Background = sp[1];
+            }
             else
             {
                 throw new FormatException(string.Format("unknown header \"{0}\"", cmd));

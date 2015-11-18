@@ -34,6 +34,9 @@ namespace Stg.Script
                 DX.PlaySoundMem(bgm, Script.BgmLoop ? DX.DX_PLAYTYPE_LOOP : DX.DX_PLAYTYPE_BACK);
             }
 
+            // 背景画像読み込み
+            game.LoadBackgroundImage(Path.Combine("img", Script.Background));
+
             // 背景色
             game.BackR = Script.BackR;
             game.BackG = Script.BackG;

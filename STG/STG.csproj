@@ -81,6 +81,12 @@
     <Content Include="img\back.bmp">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="img\back1.bmp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\default.bmp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="img\own.bmp">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

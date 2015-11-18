@@ -11,6 +11,10 @@ namespace Stg.Script
         public Script()
         {
             Statements = new List<Statement>();
+            Background = "default.bmp";
+            BackR = 255;
+            BackG = 255;
+            BackB = 255;
         }
 
         public List<Statement> Statements { get; private set; }
@@ -19,6 +23,11 @@ namespace Stg.Script
         /// BGM のファイル名
         /// </summary>
         public string Bgm { get; set; }
+
+        /// <summary>
+        /// 背景画像のファイル名
+        /// </summary>
+        public string Background { get; set; }
 
         /// <summary>
         /// BGM をループ再生するか否か

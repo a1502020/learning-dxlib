@@ -18,7 +18,6 @@ namespace Stg
             Enemies = new List<Enemy>();
             EnemyBullets = new List<Bullet>();
 
-            imgBack = DX.LoadGraph("img/back1.bmp");
             this.key = key;
 
             // スクリプト読み込み
@@ -225,6 +224,15 @@ namespace Stg
         /// </summary>
         public int BackB { get; set; }
 
+        /// <summary>
+        /// 背景画像を読み込んで設定する。
+        /// </summary>
+        /// <param name="path">背景画像のファイルパス</param>
+        public void LoadBackgroundImage(string path)
+        {
+            imgBack = DX.LoadGraph(path);
+        }
+
         // キー入力
         private Key key;
 
@@ -250,7 +258,7 @@ namespace Stg
         private bool finished = false;
 
         // 画像
-        private int imgBack;
+        private int imgBack = -1;
 
         // ボスの HP 表示領域
         private int bossHpX1 = 4, bossHpY1 = 4, bossHpW = 632, bossHpH = 12;
