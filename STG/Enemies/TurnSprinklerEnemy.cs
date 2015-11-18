@@ -14,12 +14,11 @@ namespace Stg.Enemies
             Position stopPos, int stopTime,
             Position leavePos, int leaveTime,
             int interval, int bulletsCount,
-            double startAngle, double endAngle, TurnDirection direction)
+            double startAngle, double endAngle)
             : base(game, startPos, startTime, stopPos, stopTime, leavePos, leaveTime, interval, bulletsCount)
         {
             this.StartAngle = startAngle;
             this.EndAngle = endAngle;
-            this.Direction = direction;
         }
 
         protected override void Shoot(int bulletNum)
@@ -39,10 +38,5 @@ namespace Stg.Enemies
         /// 弾の発射終了時の方向
         /// </summary>
         public double EndAngle { get; private set; }
-
-        /// <summary>
-        /// 回転方向
-        /// </summary>
-        public TurnDirection Direction { get; private set; }
     }
 }

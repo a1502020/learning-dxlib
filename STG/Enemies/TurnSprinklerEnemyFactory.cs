@@ -18,12 +18,11 @@ namespace Stg.Enemies
         {
             return new TurnSprinklerEnemy(
                 game, StartPos, StartTime, StopPos, StopTime, LeavePos, LeaveTime, Interval, BulletsCount,
-                StartAngle, EndAngle, Direction);
+                StartAngle, EndAngle);
         }
 
         public double StartAngle { get; set; }
         public double EndAngle { get; set; }
-        public TurnDirection Direction { get; set; }
 
         private ShootingGame game;
     }
