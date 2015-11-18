@@ -44,7 +44,7 @@ namespace Stg.Script
             }
             else if (name == "turn")
             {
-                if (args.Count < 2 + 9)
+                if (args.Count < 2 + 11)
                 {
                     throw new FormatException("e turn with too few arguments.");
                 }
@@ -56,6 +56,8 @@ namespace Stg.Script
                     StopTime = int.Parse(args[7]),
                     LeavePos = new Position(double.Parse(args[8]), double.Parse(args[9])),
                     LeaveTime = int.Parse(args[10]),
+                    Interval = int.Parse(args[11]),
+                    BulletsCount = int.Parse(args[12]),
                 };
             }
             else

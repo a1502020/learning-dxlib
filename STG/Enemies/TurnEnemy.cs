@@ -12,7 +12,8 @@ namespace Stg.Enemies
         public TurnEnemy(ShootingGame game,
             Position startPos, int startTime,
             Position stopPos, int stopTime,
-            Position leavePos, int leaveTime)
+            Position leavePos, int leaveTime,
+            int interval, int bulletsCount)
             : base(game)
         {
             Radius = 20;
@@ -23,6 +24,8 @@ namespace Stg.Enemies
             this.StopTime = stopTime;
             this.LeavePos = leavePos.Clone();
             this.LeaveTime = leaveTime;
+            this.Interval = interval;
+            this.BulletsCount = bulletsCount;
         }
 
         public override void Update()
@@ -46,7 +49,7 @@ namespace Stg.Enemies
                 Position.X = StopPos.X;
                 Position.Y = StopPos.Y;
 
-                if (frame <= 30 && frame % 15 == 0)
+                if (frame < Interval * BulletsCount && frame % Interval == 0)
                 {
                     var angle = Math.Atan2(Game.OwnChar.Position.Y - Position.Y, Game.OwnChar.Position.X - Position.X);
                     Game.EnemyBullets.Add(new Bullet(1, Position.Clone(), 5, angle, 5.0, DX.GetColor(255, 255, 0)));
@@ -86,6 +89,8 @@ namespace Stg.Enemies
         public int StopTime { get; private set; }
         public Position LeavePos { get; private set; }
         public int LeaveTime { get; private set; }
+        public int Interval { get; private set; }
+        public int BulletsCount { get; private set; }
 
         private int phase = 0;
         private int frame = 0;

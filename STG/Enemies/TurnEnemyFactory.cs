@@ -19,10 +19,12 @@ namespace Stg.Enemies
         public int StopTime { get; set; }
         public Position LeavePos { get; set; }
         public int LeaveTime { get; set; }
+        public int Interval { get; set; }
+        public int BulletsCount { get; set; }
 
         public override Enemy Create()
         {
-            return new TurnEnemy(game, StartPos, StartTime, StopPos, StopTime, LeavePos, LeaveTime);
+            return new TurnEnemy(game, StartPos, StartTime, StopPos, StopTime, LeavePos, LeaveTime, Interval, BulletsCount);
         }
 
         private ShootingGame game;
