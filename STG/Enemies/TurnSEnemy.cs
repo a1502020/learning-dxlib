@@ -18,7 +18,7 @@ namespace Stg.Enemies
         {
         }
 
-        protected override void Shoot()
+        protected override void Shoot(int bulletNum)
         {
             var angle = Math.Atan2(Game.OwnChar.Position.Y - Position.Y, Game.OwnChar.Position.X - Position.X);
             for (var i = 0; i < 5; ++i)

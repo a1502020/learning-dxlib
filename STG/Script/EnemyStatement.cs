@@ -92,6 +92,40 @@ namespace Stg.Script
                     BulletsCount = int.Parse(args[12]),
                 };
             }
+            else if (name == "turn_sprinkler")
+            {
+                if (args.Count < 2 + 14)
+                {
+                    throw new FormatException("e turn_sprinkler with too few arguments.");
+                }
+                TurnDirection dir;
+                if (args[13] == "left")
+                {
+                    dir = TurnDirection.Left;
+                }
+                else if (args[13] == "right")
+                {
+                    dir = TurnDirection.Right;
+                }
+                else
+                {
+                    throw new FormatException("TurnDirection value should be left or right.");
+                }
+                factory = new TurnSprinklerEnemyFactory(game)
+                {
+                    StartPos = new Position(double.Parse(args[2]), double.Parse(args[3])),
+                    StartTime = int.Parse(args[4]),
+                    StopPos = new Position(double.Parse(args[5]), double.Parse(args[6])),
+                    StopTime = int.Parse(args[7]),
+                    LeavePos = new Position(double.Parse(args[8]), double.Parse(args[9])),
+                    LeaveTime = int.Parse(args[10]),
+                    Interval = int.Parse(args[11]),
+                    BulletsCount = int.Parse(args[12]),
+                    Direction = dir,
+                    StartAngle = double.Parse(args[14]) * Math.PI / 180,
+                    EndAngle = double.Parse(args[15]) * Math.PI / 180,
+                };
+            }
             else
             {
                 throw new FormatException(string.Format("Unknown enemy name \"{0}\"", name));

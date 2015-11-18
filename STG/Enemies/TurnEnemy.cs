@@ -51,7 +51,7 @@ namespace Stg.Enemies
 
                 if (frame < Interval * BulletsCount && frame % Interval == 0)
                 {
-                    this.Shoot();
+                    this.Shoot(frame / Interval);
                 }
 
                 ++frame;
@@ -91,7 +91,7 @@ namespace Stg.Enemies
         public int Interval { get; private set; }
         public int BulletsCount { get; private set; }
 
-        protected virtual void Shoot()
+        protected virtual void Shoot(int bulletNum)
         {
             var angle = Math.Atan2(Game.OwnChar.Position.Y - Position.Y, Game.OwnChar.Position.X - Position.X);
             Game.EnemyBullets.Add(new Bullet(1, Position.Clone(), 5, angle, 5.0, DX.GetColor(255, 255, 0)));

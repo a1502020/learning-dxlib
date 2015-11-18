@@ -53,6 +53,8 @@
     <Compile Include="Enemies\TurnEnemyFactory.cs" />
     <Compile Include="Enemies\TurnSEnemy.cs" />
     <Compile Include="Enemies\TurnSEnemyFactory.cs" />
+    <Compile Include="Enemies\TurnSprinklerEnemy.cs" />
+    <Compile Include="Enemies\TurnSprinklerEnemyFactory.cs" />
     <Compile Include="Enemy.cs" />
     <Compile Include="EnemyFactory.cs" />
     <Compile Include="Key.cs" />
@@ -74,6 +76,7 @@
     <Compile Include="ShootingGame.cs" />
     <Compile Include="Enemies\StraightEnemy.cs" />
     <Compile Include="StgMain.cs" />
+    <Compile Include="TurnDirection.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
