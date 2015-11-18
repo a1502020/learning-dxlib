@@ -31,6 +31,20 @@ namespace Stg.Script
                     Interval = int.Parse(args[6]),
                 };
             }
+            else if (name == "straight_s")
+            {
+                if (args.Count < 2 + 5)
+                {
+                    throw new FormatException("e straight with too few arguments.");
+                }
+                factory = new StraightSEnemyFactory(game)
+                {
+                    Position = new Position(double.Parse(args[2]), double.Parse(args[3])),
+                    Angle = double.Parse(args[4]) * Math.PI / 180,
+                    Speed = double.Parse(args[5]),
+                    Interval = int.Parse(args[6]),
+                };
+            }
             else if (name == "boar")
             {
                 if (args.Count < 2 + 2)

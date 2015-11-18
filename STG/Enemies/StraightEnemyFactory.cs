@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Stg.Enemies
 {
-    class StraightEnemyFactory : EnemyFactory
+    public class StraightEnemyFactory : EnemyFactory
     {
         public StraightEnemyFactory(ShootingGame game)
         {
@@ -38,6 +38,6 @@ namespace Stg.Enemies
         /// </summary>
         public int Interval { get; set; }
 
-        private ShootingGame game;
+        protected ShootingGame game;
     }
 }

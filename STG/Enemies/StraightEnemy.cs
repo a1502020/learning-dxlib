@@ -39,8 +39,7 @@ namespace Stg.Enemies
             if (frameCnt == Interval)
             {
                 frameCnt = 0;
-                var bulletAngle = Math.Atan2(Game.OwnChar.Position.Y - Position.Y, Game.OwnChar.Position.X - Position.X);
-                Game.EnemyBullets.Add(new Bullet(1, Position, 10, bulletAngle, 5.0, DX.GetColor(255, 255, 0)));
+                this.Shoot();
             }
 
             // 画面外に出たら消える
@@ -81,6 +80,15 @@ namespace Stg.Enemies
         /// 弾の発射間隔[frame]
         /// </summary>
         public int Interval { get; private set; }
+
+        /// <summary>
+        /// 弾を撃つ。
+        /// </summary>
+        protected virtual void Shoot()
+        {
+            var angle = Math.Atan2(Game.OwnChar.Position.Y - Position.Y, Game.OwnChar.Position.X - Position.X);
+            Game.EnemyBullets.Add(new Bullet(1, Position, 10, angle, 5.0, DX.GetColor(255, 255, 0)));
+        }
 
         private int frameCnt = 0;
         private bool appeared = false;

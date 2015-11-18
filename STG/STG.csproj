@@ -45,6 +45,8 @@
     <Compile Include="Enemies\BoarEnemyFactory.cs" />
     <Compile Include="BossEnemy.cs" />
     <Compile Include="Enemies\StraightEnemyFactory.cs" />
+    <Compile Include="Enemies\StraightSEnemy.cs" />
+    <Compile Include="Enemies\StraightSEnemyFactory.cs" />
     <Compile Include="Enemies\TestBoss.cs" />
     <Compile Include="Enemies\TestBossFactory.cs" />
     <Compile Include="Enemies\TurnEnemy.cs" />
