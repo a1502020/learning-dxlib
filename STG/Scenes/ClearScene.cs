@@ -33,7 +33,7 @@ namespace Stg.Scenes
             game.Draw();
 
             drawStringWithShadow(scriptName, 8, 8);
-            drawStringWithShadow(string.Format("Stage Clear!", scriptName), 8, 26);
+            drawStringWithShadow(string.Format("Stage Clear!{0}", game.DebugMode ? " (Debug Mode)" : ""), 8, 26);
             drawStringWithShadow("(Press Z to back to title screen)", 8, 44);
         }
 

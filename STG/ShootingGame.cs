@@ -37,6 +37,11 @@ namespace Stg
         /// </summary>
         public void BeginScript()
         {
+            if (key.IsPressing(DX.KEY_INPUT_LCONTROL))
+            {
+                runner.Script.DebugMode = true;
+            }
+
             runner.Begin();
         }
 
