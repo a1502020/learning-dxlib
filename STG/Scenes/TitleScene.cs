@@ -43,7 +43,16 @@ namespace Stg.Scenes
             {
                 if (cursor < scriptPaths.Count)
                 {
-                    NextScene = new StgScene(key, scriptPaths[cursor]);
+                    try
+                    {
+                        NextScene = new StgScene(key, scriptPaths[cursor]);
+                    }
+                    catch (FormatException ex)
+                    {
+                        NextScene = this;
+                        errMes = string.Format("スクリプト読み込み失敗: {0}", ex.Message);
+                        errTime = 180;
+                    }
                 }
                 else
                 {
@@ -60,6 +69,12 @@ namespace Stg.Scenes
                 DX.DrawString(32, 8 + 16 * i, choices[i], DX.GetColor(255, 255, 255));
             }
             DX.DrawCircle(16, 16 + cursor * 16, 8, DX.GetColor(255, 0, 0));
+
+            if (errTime > 0)
+            {
+                DX.DrawString(8, 462, errMes, DX.GetColor(255, 255, 0));
+                --errTime;
+            }
         }
 
         public override Scene NextScene { get; protected set; }
@@ -67,6 +82,9 @@ namespace Stg.Scenes
         private Key key;
         private List<string> scriptPaths, choices;
         private int cursor = 0;
+
+        private string errMes = "";
+        private int errTime = 0;
 
         private static readonly string scriptsDir = "./scripts";
     }
