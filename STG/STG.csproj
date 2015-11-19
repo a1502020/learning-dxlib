@@ -85,21 +85,21 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="bgm\このフォルダにBGMの音声ファイルを置く.txt">
+    <None Include="bgm\このフォルダにBGMの音声ファイルを置く">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    </None>
     <Content Include="img\default.bmp">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="img\own.bmp">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="img\このフォルダに背景画像ファイルを置く.txt">
+    <None Include="img\このフォルダに背景画像ファイルを置く">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="scripts\このフォルダにスクリプトファイルを置く.txt">
+    </None>
+    <None Include="scripts\このフォルダにスクリプトファイルを置く">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
