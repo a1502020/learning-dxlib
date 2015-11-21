@@ -87,7 +87,6 @@ namespace Stg
         public void Draw()
         {
             DX.DrawGraph((int)(Position.X - 16), (int)(Position.Y - 22), img, DX.TRUE);
-            DX.DrawCircle((int)Position.X, (int)Position.Y, Radius, DX.GetColor(0, 0, 0));
         }
 
         /// <summary>
